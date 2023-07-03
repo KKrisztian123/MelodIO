@@ -1,0 +1,7 @@
+{
+  "name": "MelodIO",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react-vite"
+}

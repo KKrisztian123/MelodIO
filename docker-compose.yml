@@ -1,0 +1,26 @@
+services:
+  database:
+      container_name: MelodIO-mysql
+      image: mysql:8.0
+      environment:
+          MYSQL_ROOT_PASSWORD: root
+          MYSQL_DATABASE: MelodIO
+      volumes:
+        - ./database:/docker-entrypoint-initdb.d
+      ports:
+          - "3306:3306"
+  backend:
+    container_name: MelodIO-backend
+    build: ./backend
+    depends_on:
+      - database
+    ports:
+    - "3000:3000"
+  frontend:
+    container_name: MelodIO-frontend
+    stdin_open: true
+    build: ./frontend
+    depends_on:
+      - backend
+    ports:
+    - "5173:5173"
