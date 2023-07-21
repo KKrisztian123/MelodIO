@@ -1,0 +1,24 @@
+.placeholder{
+    background-color: var(--ion-color-dark);
+    color: var(--ion-color-dark-contrast);
+    display: grid;
+    font-weight: 600;
+    place-items: center;
+    aspect-ratio: 1;
+    box-shadow: var(--shadow-medium);
+}
+.placeholder.small{
+    width: 48px;
+    border-radius: 12px;
+    font-size: 0.875rem;
+}
+.placeholder.medium{
+    width: 80px;
+    border-radius: 16px;
+    font-size: 1.5rem;
+}
+.placeholder.large{
+    width: 250px;
+    border-radius: 33px;
+    font-size: 4rem;
+}

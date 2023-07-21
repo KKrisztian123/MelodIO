@@ -1,0 +1,21 @@
+.chip{
+    width: fit-content;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 40px;
+    height: 32px;
+    background-color: rgba(var(--ion-color-light-rgb),0.8);
+    backdrop-filter: blur(30px);
+    transform: translate3d(0, 0, 0);
+    -ms-transform: translate3d(0, 0, 0);
+    border: 1px solid var(--ion-color-light-shade);
+    padding: 0 22px;
+    font-weight: 500;
+    font-size: 0.875rem;
+    box-shadow: var(--shadow-medium);
+    gap: 6px;
+}
+.chipIcon{
+    color: var(--ion-color-primary);
+}

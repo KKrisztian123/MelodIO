@@ -1,0 +1,19 @@
+.tag{
+    background-color: var(--ion-color-dark);
+    color: var(--ion-color-dark-contrast);
+    padding: 5px 10px;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 0.875rem;
+    box-shadow: var(--shadow-small);
+    text-shadow: var(--shadow-small);
+}
+.tagContainer{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+}
+.center{
+    align-items: center;
+}

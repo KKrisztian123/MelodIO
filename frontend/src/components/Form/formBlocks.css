@@ -1,0 +1,15 @@
+div.form-block{
+    width: 100%;
+    display: block;
+}
+div.form-block-50{
+    display: block;
+    width: 50%;
+}
+div.form-flex{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}

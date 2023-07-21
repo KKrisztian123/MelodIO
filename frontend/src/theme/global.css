@@ -1,0 +1,17 @@
+body{
+    box-sizing: border-box;
+    font-family: "Inter", Arial, Helvetica, sans-serif;
+    background-color: var(--ion-background-color);
+    color: var(--ion-text-color);
+}
+h1,h2,h3,h4,h5{
+    font-family: "Raleway", Arial, Helvetica, sans-serif;
+}
+a{
+    text-decoration: none;
+    outline: none;
+    color: inherit;
+}
+button{
+    font-family: inherit;
+}

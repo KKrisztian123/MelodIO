@@ -1,0 +1,1 @@
+type AllOrNothing<T> = T | Partial<Record<keyof T, undefined>>

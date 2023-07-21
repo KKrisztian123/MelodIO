@@ -1,0 +1,171 @@
+.inp-wrapper{
+  width: 90%;
+  margin: 0 auto;
+  max-width: 400px;
+}
+.inp-wrapper .inp-desc{
+  font-size: 0.8rem;
+  margin:0;
+  padding:5px;
+  display: inline-block;
+  padding-bottom: 15px;
+  color: rgba(var(--ion-color-light-contrast-rgb), 0.5);
+}
+.inp-desc b{
+  transition: 300ms ease-in-out;
+  display: inline-block;
+}
+.inp-error{
+  color: var(--ion-color-danger);
+}
+button.inp-bait{
+  all: unset;
+  height: 0;
+  width: 0;
+  visibility: hidden;
+  display: contents;
+  pointer-events: none;
+}
+
+.inp * {
+  box-sizing: border-box;
+}
+.inp-block-wrapper{
+  position: relative;
+}
+.right-ornament{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 20px;
+  position: absolute;
+  right: 10px;
+  top: 0;
+  height: 100%;
+  pointer-events: all;
+  z-index: 2;
+}
+.inp-icon:focus svg{
+  color: var(--ion-color-primary);
+}
+.inp-icon svg{
+  color: rgba(var(--ion-color-light-contrast-rgb), 0.5);
+  transition: color 200ms ease-in;
+}
+.inp input:focus ~ .inp-icon svg {
+  color: var(--ion-color-primary);
+}
+
+.inp {
+  position: relative;
+  margin: auto;
+  width: 100%;
+  background-color: var(--ion-color-light);
+  display: inline-block;
+  border-radius: 14px;
+  box-shadow: var(--shadow-medium);
+}
+.inp .label {
+  position: absolute;
+  top: 6px;
+  left: 26px;
+  font-size: 16px;
+  color: rgba(var(--ion-color-light-contrast-rgb), 0.5);
+  font-weight: 500;
+  transform-origin: 0 0;
+  transform: translate3d(0, 12px, 0);
+  transition: all 0.2s ease;
+  pointer-events: none;
+}
+.inp .label::after{
+  content: "";
+  display: block;
+  background-color: transparent;
+  height: 4.5px;
+  width: calc(100% + 10px);
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: -5px;
+  z-index: -1;
+  transition: background-color 200ms ease-in-out;
+}
+
+.inp .focus-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(var(--ion-color-light-contrast-rgb), 0.02);
+  z-index: -1;
+  transform: scaleX(0);
+  transform-origin: left;
+  border-radius: 14px;
+}
+.inp input, .inp textarea{
+  -webkit-appearance: none;
+  -moz-appearance: none;
+       appearance: none;
+  width: 100%;
+  border: 0;
+  font-family: inherit;
+  padding: 16px 16px 16px 16px;
+  height: 56px;
+  font-size: 16px;
+  font-weight: 400;
+  background: var(--ion-color-light);
+  /* box-shadow: inset 0 -1px 0 rgba(var(--ion-color-light-contrast-rgb), 0.3); */
+  color: var(--ion-color-light-contrast-rgb);
+  transition: all 0.15s ease;
+  border-radius: 14px;
+  border: 3px solid var(--ion-color-primary-tint);
+}
+.inp textarea{
+  resize: none;
+  min-height: 200px;
+  padding-top: 25px;
+}
+.inp input:hover, .inp textarea:hover {
+  background: rgba(var(--ion-color-light-contrast-rgb), 0.01);
+ /* box-shadow: inset 0 -1px 0 rgba(var(--ion-color-light-contrast-rgb), 0.5); */
+}
+.inp input:not(:-moz-placeholder-shown) + .label, .inp textarea:not(:-moz-placeholder-shown) + .label {
+  color: var(--ion-color-primary-tint);
+  transform: translate3d(0, -12px, 0) scale(0.75);
+}
+.inp input:not(:-moz-placeholder-shown) + .label::after, .inp textarea:not(:-moz-placeholder-shown) + .label::after {
+  background: var(--ion-color-light);
+}
+.inp input:not(:-ms-input-placeholder) + .label, .inp textarea:not(:-ms-input-placeholder) + .label {
+  color: var(--ion-color-primary-tint);
+  transform: translate3d(0, -12px, 0) scale(0.75);
+}
+.inp input:not(:-ms-input-placeholder) + .label::after, .inp textarea:not(:-ms-input-placeholder) + .label::after {
+  background: var(--ion-color-light);
+}
+.inp input:not(:placeholder-shown) + .label, .inp textarea:not(:placeholder-shown) + .label {
+  color: var(--ion-color-primary-tint);
+  transform: translate3d(0, -12px, 0) scale(0.75);
+}
+.inp input:not(:placeholder-shown) + .label::after, .inp textarea:not(:placeholder-shown) + .label::after {
+  background: var(--ion-color-light);
+}
+
+.inp input:focus,.inp textarea:focus {
+  background: rgba(var(--ion-color-light-contrast-rgb), 0.02);
+  outline: none;
+  border-color: var(--ion-color-primary);
+}
+.inp input:focus + .label, .inp textarea:focus + .label {
+  color: var(--ion-color-primary);
+  transform: translate3d(0, -12px, 0) scale(0.75);
+}
+.inp input:focus + .label::after, .inp textarea:focus + .label::after {
+  background: var(--ion-color-light-shade);
+}
+
+.inp input:focus + .label + .focus-bg, .inp textarea:focus + .label + .focus-bg  {
+  transform: scaleX(1);
+  transition: all 0.1s ease;
+}

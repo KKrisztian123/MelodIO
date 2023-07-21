@@ -1,0 +1,14 @@
+.accountInformation{
+    font-weight: 600;
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+}
+.subTitle{
+    color: var(--ion-color-tertiary-contrast);
+    font-size: 0.875rem;
+    margin-bottom: 5px;
+}
+.title{
+    margin-top: 0;
+}

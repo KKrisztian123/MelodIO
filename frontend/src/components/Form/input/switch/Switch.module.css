@@ -1,0 +1,55 @@
+.switchError{
+  color: var(--ion-color-danger);
+}
+
+.switchContainer p{
+  transition: color 200ms ease-in-out;
+}
+.switchContainer label{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  cursor: pointer;
+}
+.switchContainer label p {
+  margin: 0;
+}
+.switch{
+  all: unset;
+  display: block;
+  cursor: pointer;
+  transition: background-color 200ms ease-in-out, border-color 200ms ease-in-out;
+  width: 45px;
+  height: 24px;
+  border-radius: 20px;
+  box-shadow: var(--shadow-medium);
+  background-color: transparent;
+  border: 2px solid var(--ion-color-primary-tint);
+}
+.switch:checked{
+  background-color: var(--ion-color-primary);
+  border-color: var(--ion-color-primary);
+}
+.switch:checked ~ .switchThumb {
+  background-color: var(--ion-color-light);
+  transform: translateX(22px);
+}
+.switchWrapper{
+  position: relative;
+  display: block;
+  width: fit-content;
+}
+.switchThumb{
+  position: absolute;
+  background-color: var(--ion-color-primary-tint);
+  transition: transform 200ms ease-in-out, background-color 200ms ease-in-out;
+  left: 5px;
+  top: 5px;
+  display: block;
+  width: 18px;
+  height: 18px;
+  border-radius: 10px;
+  box-shadow: var(--shadow-small);
+}

@@ -1,0 +1,62 @@
+.selectionLink{
+    all:unset;
+    cursor: pointer;
+    border-radius: 20px;
+    padding: 10px;
+    display: block;
+    width: fit-content;
+    color: inherit;
+    transition: background-color 200ms ease-in-out;
+}
+.selectionItem{
+    width: fit-content;
+}
+.selectionIcon{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 80px;
+    height: 80px;
+    transition: color 200ms ease-in-out;
+    box-sizing: border-box;
+}
+.selectionIcon svg{
+    filter: drop-shadow(var(--shadow-medium));
+}
+.selectionLink:hover, .selectionLink:focus{
+    background-color: var(--ion-color-light-shade)
+}
+.selectionLink .selectionIcon{
+    padding: 10px;
+    border-radius: 20px;
+    background-color: var(--ion-color-light-tint);
+    border: 1px solid var(--ion-color-light-shade);
+    box-shadow: var(--shadow-medium);
+    font-size: 2rem;
+    color: var(--ion-color-primary-tint);
+}
+.selectionLink .selectionInfo {
+    margin: 0;
+    margin-top: 10px;
+    text-align: center;
+}
+.selectionLink .selectionInfo .selectionTitle{
+    font-weight: 600;
+    font-size: 0.875rem;
+}
+.selectionLink .selectionInfo .selectionActiveText{
+    font-weight: 600;
+    font-size: 0.75rem;
+    color: var(--ion-color-primary);
+    display: block;
+    padding-top: 5px;
+    padding-bottom: 2px;
+}
+.selectionItem.selectionActive .selectionIcon{
+    color: var(--ion-color-primary);
+}
+.activeTextWrapper{
+    display: block;
+    overflow: hidden;
+    min-height: 20px;
+}

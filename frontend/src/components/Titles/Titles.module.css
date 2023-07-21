@@ -1,0 +1,26 @@
+.title{
+    font-weight: bold;
+    margin-top: 0;
+}
+h1.title{
+    font-size: 1.25rem;
+}
+h2.title{
+    font-size: 1.5rem;
+}
+h3.title{
+    font-size: 1.25rem;
+}
+h4.title{
+    font-size: 1.125rem;
+}
+.light{
+    color: var(--ion-color-light-contrast);
+}
+.dark{
+    color: var(--ion-color-dark-contrast);
+    text-shadow: var(--shadow-small);
+}
+.centered {
+    text-align: center;
+}

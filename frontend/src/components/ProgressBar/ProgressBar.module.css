@@ -1,0 +1,33 @@
+.progressBar {
+  height: 8px;
+  border-radius: 4px;
+  background-color: var(--ion-color-primary-tint);
+  box-shadow: var(--shadow-medium);
+  overflow: hidden;
+}
+.progress {
+  height: 100%;
+  width: 0;
+  background-color: var(--ion-color-primary);
+  border-radius: 4px;
+}
+.progressAnimation {
+  position: relative;
+  animation: progressAnimation 1000ms ease-in-out alternate infinite;
+}
+.progressBar.small{
+  height: 4px;
+}
+.progressBar.small .progress{
+  height: 4px;
+}
+@keyframes progressAnimation {
+  from {
+    width: 75%;
+    left: -75%;
+  }
+  to{
+    width: 75%;
+    left:100%;
+  }
+}

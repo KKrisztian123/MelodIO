@@ -1,0 +1,49 @@
+@use '../../../../../theme/theme';
+.datepicker-block{
+    margin-left: 20px;
+}
+.datepicker-title{
+    font-weight: bold;
+    margin-bottom: 0;
+    color: theme.$theme-color;
+}
+.datepicker-date{
+    font-size: 2rem;
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+.datepicker .MuiButtonBase-root.MuiPickersDay-root.Mui-selected{
+    background-color: theme.$theme-color;
+    color: theme.$primary-color;
+    text-shadow: theme.$shadow-subtle;
+    box-shadow: theme.$shadow;
+    font-weight: bold;
+}
+.datepicker .MuiClock-pin,.datepicker .MuiClockPointer-root,.datepicker .MuiClockPointer-thumb{
+    background-color: theme.$theme-color;
+    border-color: theme.$theme-color;
+}
+.datepicker .MuiClockNumber-root .Mui-selected{
+    color: theme.$theme-color;
+}
+.datepicker .MuiClockPicker-root .MuiPickersArrowSwitcher-root{
+    margin-top: 45px;
+    margin-right: 15px;
+}
+.datepicker .MuiButtonBase-root.MuiPickersDay-root{
+    background-color: transparent;
+    transition: background-color 200ms ease-in-out, color 200ms ease-in-out;
+}
+.datepicker .MuiPickerStaticWrapper-content{
+    min-width: 280px;
+}
+.datepicker{
+   color: theme.$secondary-color; 
+}
+.datepicker .PrivatePickersYear-yearButton.Mui-selected{
+    background-color: theme.$theme-color;
+    color: theme.$primary-color;
+    text-shadow: theme.$shadow-subtle;
+    box-shadow: theme.$shadow;
+    font-weight: bold;
+}

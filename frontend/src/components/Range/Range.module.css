@@ -1,0 +1,78 @@
+.range{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+}
+.rangeBarContainer{
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding: 20px 0;
+}
+
+.range.startOrnament,.range.endOrnament{
+    margin: 0;
+    font-weight: 600;
+}
+
+.rangeBar{
+    overflow: hidden;
+    width: 100%;
+    height: 8px;
+    border-radius: 4px;
+    box-shadow: var(--shadow-medium);
+    background-color: var(--ion-color-primary-tint);
+}
+.rangeBar.rangeBarActive{
+    background-color:  var(--ion-color-primary);
+}
+.rangeKnob{
+    width: 18px;
+    height: 18px;
+    position: absolute;
+    left: 0;
+    transform: translateX(-50%);
+    border-radius: 6px;
+    background-color:  var(--ion-color-primary);
+    box-shadow: var(--shadow-medium);
+    pointer-events: none;
+}
+
+.range.horizontal{
+    flex-direction: row;
+}
+.range.vertical{
+    flex-direction: column;
+}
+.range.horizontal.reverse{
+    flex-direction: row-reverse;
+}
+.range.vertical.reverse{
+    flex-direction: column-reverse;
+}
+.range.reverse .rangeBarContainer .rangeBar{
+    background-color: var(--ion-color-primary);
+}
+.range.reverse .rangeBarContainer .rangeBarActive{
+    background-color: var(--ion-color-primary-tint);
+}
+.range.vertical .rangeBarContainer{
+    padding: 0 20px;
+}
+.range.vertical .rangeBarContainer .rangeBar{
+    width: 8px;
+    height: 100%;
+    min-height: 100px;
+}
+.range.vertical .rangeBarContainer .rangeBar.rangeBarActive{
+    min-height: unset;
+    position: absolute;
+}
+.range.vertical .rangeBarContainer .rangeKnob{
+    left: unset;
+    top: 0;
+    transform: translateY(-50%);
+}

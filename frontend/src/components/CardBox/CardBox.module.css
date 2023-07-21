@@ -1,0 +1,20 @@
+.container{
+    padding: 0 10px;
+    border-radius: 31px;
+    min-height: 50px;
+    display: flex;
+    align-items: center;
+    box-shadow: var(--shadow-medium);
+    background-color: rgba(var(--ion-color-light-rgb),0.8);
+    backdrop-filter: blur(30px);
+    transform: translate3d(0, 0, 0);
+    -ms-transform: translate3d(0, 0, 0);
+}
+.boxContent{
+    flex-grow: 1;
+}
+.rightOrnament{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

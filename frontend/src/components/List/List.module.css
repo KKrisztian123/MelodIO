@@ -1,0 +1,38 @@
+.itemInformation{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+.itemLink{
+    display: block;
+}
+.leftOrnament{
+    width: 48px;
+    display: grid;
+    place-items: center; 
+}
+.rightOrnament{
+    width: 48px;
+    position: absolute;
+    display: grid;
+    place-items: center;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 2;
+}
+.rightOrnamentPlaceholder{
+    width: 48px;
+}
+.item{
+    position: relative;
+}
+.itemText{
+    padding: 0 15px;
+    box-sizing: border-box;
+    flex-grow: 1;
+}
+.listContainer{
+    
+}

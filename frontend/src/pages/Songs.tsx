@@ -1,6 +1,7 @@
 import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
 import ExploreContainer from '../components/ExploreContainer';
 import './Songs.css';
+import Switch from '../components/Form/input/switch/Switch';
 
 const SongsPage: React.FC = () => {
   return (
