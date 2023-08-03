@@ -19,7 +19,11 @@ const EmailField = ({
   id,
   config,
   ...rest
-}: EmailFieldProps & Omit<InputFieldWithButtonProps, "type" | "error">) => {
+}: EmailFieldProps &
+  Omit<
+    InputFieldWithButtonProps,
+    "type" | "error" | "onChange" | "onBlur" | "name"
+  >) => {
   const { register } = useFormContext();
   const pattern = {
     //@ts-ignore

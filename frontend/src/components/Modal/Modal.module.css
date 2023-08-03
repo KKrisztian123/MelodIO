@@ -20,7 +20,7 @@
     position: fixed;
     inset: 0;
     cursor: pointer;
-    z-index: 100;
+    z-index: 105;
 }
 .modal{
     position: fixed;
@@ -39,7 +39,7 @@
     justify-content: flex-start;
     flex-direction: column;
     padding-bottom: 50px;
-    z-index: 101;
+    z-index: 106;
 }
 .modal::after{
     content: "";
@@ -50,4 +50,8 @@
     bottom: -140px;
     background-color: var(--ion-color-light);
     z-index: 102;
+}
+.modalContent{
+    padding: 20px;
+    padding-top: 30px;
 }

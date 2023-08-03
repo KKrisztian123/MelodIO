@@ -1,0 +1,33 @@
+.bottomNavigation{
+    width: calc(100% - 30px);
+    /* margin: 0 auto; */
+    bottom: 15px;
+    position: fixed;
+    left: 50%;
+    transform: translate3d(-50%,0,0);
+    border-radius: 20px 20px 40px 40px;
+    outline: unset;
+    border: unset;
+    box-shadow: var(--shadow-medium);
+    background: #ffffffaa;
+    backdrop-filter: blur(40px);
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    font-size: 1.5rem;
+    padding: 0px 10%;
+    z-index: 5;
+}
+.navigationButton{
+    background-color: transparent;
+    color: var(--ion-color-primary-tint);
+    transition: color 250ms ease-in-out;
+    width: 100%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+.navigationButton.navigationButtonActive{
+    color: var(--ion-color-primary);
+}

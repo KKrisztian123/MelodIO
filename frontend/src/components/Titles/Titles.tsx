@@ -1,4 +1,4 @@
-import type { PropsWithChildren } from "react";
+import type { HTMLAttributes, PropsWithChildren } from "react";
 import styles from "./Titles.module.css";
 
 export type TitleProps = {
@@ -8,7 +8,9 @@ export type TitleProps = {
   colours?: "auto" | "light" | "dark";
   /** Toggles text shadow */
   hasShadow?: boolean;
-};
+  /** className prop of H1 title. */
+  className?: string;
+} & HTMLAttributes<HTMLHeadingElement>;
 
 /** H1 title compontent */
 export const H1 = ({
@@ -16,13 +18,17 @@ export const H1 = ({
   centered = false,
   colours = "auto",
   hasShadow = false,
+  className,
+  ...rest
 }: PropsWithChildren<TitleProps>) => (
   <h1
+    {...rest}
     className={[
       styles.title,
       centered ? styles.centered : null,
       styles[colours],
       hasShadow ? styles.shadow : null,
+      className,
     ].join(" ")}
   >
     {children}
@@ -35,8 +41,10 @@ export const H2 = ({
   centered = false,
   colours = "auto",
   hasShadow = false,
+  ...rest
 }: PropsWithChildren<TitleProps>) => (
   <h2
+    {...rest}
     className={[
       styles.title,
       centered ? styles.centered : null,
@@ -54,8 +62,10 @@ export const H3 = ({
   centered = false,
   colours = "auto",
   hasShadow = false,
+  ...rest
 }: PropsWithChildren<TitleProps>) => (
   <h3
+    {...rest}
     className={[
       styles.title,
       centered ? styles.centered : null,
@@ -73,8 +83,10 @@ export const H4 = ({
   centered = false,
   colours = "auto",
   hasShadow = false,
+  ...rest
 }: PropsWithChildren<TitleProps>) => (
   <h4
+    {...rest}
     className={[
       styles.title,
       centered ? styles.centered : null,

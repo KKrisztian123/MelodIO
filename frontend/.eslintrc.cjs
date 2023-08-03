@@ -18,6 +18,12 @@ module.exports = {
   },
   plugins: ["react", "react-hooks", "@typescript-eslint"],
   rules: {
+    "no-restricted-imports": [
+      "error",
+      {
+        patterns: ["@/features/*/*"],
+      },
+    ],
     "no-console": process.env.NODE_ENV === "production" ? "warn" : "off",
     "no-debugger": process.env.NODE_ENV === "production" ? "warn" : "off",
     "@typescript-eslint/no-unused-vars": "error",

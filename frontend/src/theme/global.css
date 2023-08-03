@@ -1,10 +1,10 @@
-body{
+body #root{
     box-sizing: border-box;
     font-family: "Inter", Arial, Helvetica, sans-serif;
     background-color: var(--ion-background-color);
     color: var(--ion-text-color);
 }
-h1,h2,h3,h4,h5{
+body #root h1,h2,h3,h4,h5{
     font-family: "Raleway", Arial, Helvetica, sans-serif;
 }
 a{
@@ -14,4 +14,11 @@ a{
 }
 button{
     font-family: inherit;
+}
+body #root p{
+    font-family: "Inter", Arial, Helvetica, sans-serif;
+}
+
+.error{
+    color: var(--ion-color-danger);
 }

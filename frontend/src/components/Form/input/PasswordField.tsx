@@ -1,5 +1,7 @@
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
-import InputFieldWithButton, { InputFieldWithButtonProps } from "./inputFieldWithButton";
+import InputFieldWithButton, {
+  InputFieldWithButtonProps,
+} from "./inputFieldWithButton";
 import { FieldValues, RegisterOptions, useFormContext } from "react-hook-form";
 import useToggle from "../../../hooks/useToggle";
 import { IconButton } from "../../Button/Button";
@@ -13,7 +15,15 @@ export type PasswordFieldProps = {
   config?: RegisterOptions<FieldValues, string> | undefined;
 };
 /** Password inputfield for forms. */
-const PasswordField = ({ id, config, ...rest }: PasswordFieldProps & Omit<InputFieldWithButtonProps, "type" | "rightOrnament" | "error">) => {
+const PasswordField = ({
+  id,
+  config,
+  ...rest
+}: PasswordFieldProps &
+  Omit<
+    InputFieldWithButtonProps,
+    "type" | "rightOrnament" | "error" | "onChange" | "onBlur" | "name"
+  >) => {
   const [isActive, toggleActive] = useToggle();
   const { register } = useFormContext();
   return (

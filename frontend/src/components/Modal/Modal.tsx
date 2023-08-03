@@ -17,6 +17,7 @@ import {
   motion,
   useAnimation,
 } from "framer-motion";
+import { createPortal } from "react-dom";
 
 type Modal = {
   /** Title of the modal content */
@@ -28,8 +29,8 @@ type Modal = {
 type Uncontrolled = {
   /** Component that triggers the modal opening. */
   triggerComponent: ReactNode;
-  changeOpen: never;
-  isOpen: never;
+  changeOpen?: never;
+  isOpen?: never;
 };
 
 type Controlled = {
@@ -89,51 +90,59 @@ const Modal = ({
         cloneElement(triggerComponent as ReactElement<ButtonProps>, {
           onClick: () => change(true),
         })}
-
-      <AnimatePresence>
-        {value && (
-          <>
-            <motion.div
-              onClick={() => change(false)}
-              tabIndex={0}
-              className={styles.modalBackdrop}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 0.2 }}
-              exit={{ opacity: 0 }}
-            />
-            <motion.div
-              className={styles.modal}
-              drag={"y"}
-              role="dialog"
-              ref={(ref) => ref?.focus()}
-              aria-labelledby={title}
-              initial="hidden"
-              animate={animation}
-              variants={animationVariants}
-              exit="hidden"
-              transition={{ duration: 0.4, type: "spring" }}
-              dragConstraints={{ top: 0 }}
-              dragElastic={0.1}
-              dragMomentum={false}
-              onDragEnd={endDrag}
-            >
-              <div className={styles.modalPin}></div>
-              <H3 centered>{title}</H3>
-              <div>
-                {children}
-                <ButtonContainer>
-                  {isValidElement(closeComponent) &&
-                    cloneElement(closeComponent as ReactElement<ButtonProps>, {
-                      onClick: () => {
-                        change(false);
-                      },
-                    })}
-                </ButtonContainer>
-              </div>
-            </motion.div>
-          </>
-        )}
-      </AnimatePresence>
+      {createPortal(
+        <>
+          <AnimatePresence>
+            {value && (
+              <>
+                <motion.div
+                  onClick={() => change(false)}
+                  tabIndex={0}
+                  className={styles.modalBackdrop}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 0.2 }}
+                  exit={{ opacity: 0 }}
+                />
+                <motion.div
+                  className={styles.modal}
+                  drag={"y"}
+                  role="dialog"
+                  ref={(ref) => ref?.focus()}
+                  aria-labelledby={title}
+                  initial="hidden"
+                  animate={animation}
+                  variants={animationVariants}
+                  exit="hidden"
+                  transition={{ duration: 0.4, type: "spring" }}
+                  dragConstraints={{ top: 0 }}
+                  dragElastic={0.1}
+                  dragMomentum={false}
+                  onDragEnd={endDrag}
+                >
+                  <div className={styles.modalPin}></div>
+                  <H3 centered>{title}</H3>
+                  <div className={styles.modalContent}>
+                    {children}
+                    {isValidElement(closeComponent) && (
+                      <ButtonContainer>
+                        {cloneElement(
+                          closeComponent as ReactElement<ButtonProps>,
+                          {
+                            onClick: () => {
+                              change(false);
+                            },
+                          }
+                        )}
+                      </ButtonContainer>
+                    )}
+                  </div>
+                </motion.div>
+              </>
+            )}
+          </AnimatePresence>
+        </>,
+        document.body
+      )}
     </>
   );
 };

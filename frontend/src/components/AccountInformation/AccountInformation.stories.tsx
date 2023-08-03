@@ -16,7 +16,7 @@ NoProfilePicture.args = {
 
 export const ProfilePicture = Template.bind({})
 ProfilePicture.args = {
-    src: "https://i.scdn.co/image/ab67616d00001e02bc3f33247a4190be63e40fb2",
+    image: "https://i.scdn.co/image/ab67616d00001e02bc3f33247a4190be63e40fb2",
     userName: "Kucsera Krisztián",
     userEmail: "kucserakrisztian1@gmail.com"
 }

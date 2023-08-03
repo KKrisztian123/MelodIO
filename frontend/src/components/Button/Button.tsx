@@ -18,7 +18,7 @@ export type ButtonProps = {
   /** Relative link */
   link?: string;
   /** Function */
-  onClick?: (e: MouseEvent<HTMLButtonElement>) => void;
+  onClick?: (e?: MouseEvent<HTMLButtonElement>) => void;
   /** Sets the button type */
   buttonType?: "button" | "submit" | "reset";
   /** Design variant */
@@ -27,6 +27,8 @@ export type ButtonProps = {
   isActive?: boolean;
   /** Fully rounded Button */
   isRounded?: boolean;
+  /** Slot for ionic components */
+  slot?: "start" | "end"
 };
 
 /** Common UI button */
@@ -42,6 +44,7 @@ const Button = ({
   buttonType = "button",
   isActive = false,
   isRounded = false,
+  slot,
   ...rest
 }: ButtonProps) => {
   if(link) {
@@ -58,6 +61,7 @@ const Button = ({
           isActive ? buttonStyle.active : "",
           isRounded ? buttonStyle.round : "",
         ].join(" ")}
+        slot={slot}
       >
         <span className={buttonStyle.buttonContainer}>
           {icon && (
@@ -84,6 +88,7 @@ const Button = ({
         isRounded ? buttonStyle.round : "",
       ].join(" ")}
       type={buttonType}
+      slot={slot}
     >
       <span className={buttonStyle.buttonContainer}>
         {icon && (
@@ -101,10 +106,12 @@ export default Button;
 
 export type IconButtonProps = Omit<
   ButtonProps,
-  "text" | "iconPosition" | "variant"
+  "text" | "iconPosition" | "variant" | "icon"
 > & {
   /** Provides an accessible name for the button. */
   label: string;
+  /** Font Awesome Icon on Button */
+  icon: IconProp;
 };
 
 /** An icon only UI button that has no written text on it. */

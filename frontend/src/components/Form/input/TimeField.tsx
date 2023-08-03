@@ -30,7 +30,7 @@ const TimeField = ({
 }: TimeFieldProps &
   Omit<
     InputFieldWithButtonProps,
-    "type" | "rightOrnament" | "error" | "onChange"
+    "type" | "rightOrnament" | "error" | "onChange" | "onBlur" | "name"
   >) => {
   const [isActive, toggleActive] = useToggle();
   const { register, setValue } = useFormContext();

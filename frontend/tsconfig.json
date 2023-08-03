@@ -5,6 +5,13 @@
     "lib": ["DOM", "DOM.Iterable", "ESNext"],
     "allowJs": false,
     "skipLibCheck": true,
+    "paths": {
+      "@features/*": ["./src/features/*"],
+      "@components/*": ["./src/components/*"],
+      "@hooks/*": ["./src/hooks/*"],
+      "@assets/*": ["./src/assets/*"],
+      "@/*": ["./src/*"],
+    },
     "esModuleInterop": false,
     "allowSyntheticDefaultImports": true,
     "strict": true,

@@ -30,7 +30,7 @@ const DateField = ({
 }: DateFieldProps &
   Omit<
     InputFieldWithButtonProps,
-    "type" | "rightOrnament" | "error" | "onChange"
+    "type" | "rightOrnament" | "error" | "onChange" | "onBlur" | "name"
   >) => {
   const [isActive, toggleActive] = useToggle();
   const { register, setValue } = useFormContext();
@@ -49,7 +49,9 @@ const DateField = ({
     (date: any) => {
       const dateValue = date.target.value;
       setDate(dateValue); //iso
-      const validatedDate = isValid(new Date(dateValue)) ? new Date(dateValue) : new Date();
+      const validatedDate = isValid(new Date(dateValue))
+        ? new Date(dateValue)
+        : new Date();
       setValue(id, format(validatedDate, "yyyy.M.d", { locale: hu }), {
         shouldValidate: true,
       }); //reformatted
@@ -72,10 +74,13 @@ const DateField = ({
     },
   });
 
-  const onChangeWrapper = useCallback((e: any) => {
-    checkDate(e.target.value) && setDate(checkDate(e.target.value));
-    onChange(e);
-  }, [checkDate, onChange]);
+  const onChangeWrapper = useCallback(
+    (e: any) => {
+      checkDate(e.target.value) && setDate(checkDate(e.target.value));
+      onChange(e);
+    },
+    [checkDate, onChange]
+  );
 
   return (
     <>

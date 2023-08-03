@@ -1,5 +1,4 @@
-import * as React from "react";
-import "./formBlocks.scss";
+import "./formBlocks.css";
 import type { PropsWithChildren } from "react";
 
 /**

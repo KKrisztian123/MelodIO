@@ -5,9 +5,9 @@ export type ProfileImageProps = {
   /** Full name of user */
   name: string;
   /** Profile picture of user */
-  image?: string;
+  image?: string | false;
   /** Size of profile Image */
-  size: "small" | "medium" | "large";
+  size?: keyof typeof imageTypes;
 };
 
 const imageTypes: { [key: string]: (props: SizedImage) => JSX.Element } = {
@@ -30,7 +30,9 @@ const ProfileImage = ({ image, name, size = "large" }: ProfileImageProps) => {
           alt={`${name} profilképe.`}
         />
       ) : (
-        <div className={`${styles.placeholder} ${styles[size]}`}>{getInitials(name)}</div>
+        <div className={`${styles.placeholder} ${styles[size]}`}>
+          {getInitials(name)}
+        </div>
       )}
     </div>
   );
@@ -49,12 +51,20 @@ export const getInitials = (fullName: string) => {
     .split(" ")
     .forEach((initial: string) => {
       if (threeLetter.indexOf(initial.slice(0, 3).toLowerCase()) !== -1) {
-        initials.push(initial.slice(0, 3));
+        initials.push(
+          capitalizeString(initial.slice(0, 3).toLocaleLowerCase())
+        );
       } else if (twoLetter.indexOf(initial.slice(0, 2).toLowerCase()) !== -1) {
-        initials.push(initial.slice(0, 2));
+        initials.push(
+          capitalizeString(initial.slice(0, 2).toLocaleLowerCase())
+        );
       } else {
-        initials.push(initial[0]);
+        initials.push(initial.charAt(0)?.toUpperCase());
       }
     });
   return initials.join("");
+};
+
+const capitalizeString = (string: string) => {
+  return string.charAt(0).toUpperCase() + string.slice(1);
 };

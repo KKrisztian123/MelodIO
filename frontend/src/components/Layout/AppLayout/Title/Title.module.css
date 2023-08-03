@@ -1,0 +1,7 @@
+.character{
+    display: inline-block;
+}
+.title{
+    overflow: hidden;
+    display: inline-block;
+}

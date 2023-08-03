@@ -1,0 +1,14 @@
+ion-app ion-content.page-content-container{
+
+}
+.page-content-container .page-content-padding{
+    padding: 20px;
+    padding-bottom: 160px;
+    width: 95%;
+    max-width: 1000px;
+    margin: 0 auto;
+    box-sizing: border-box;
+}
+.page-content-container .header-placeholder{
+    height: 88px;
+}

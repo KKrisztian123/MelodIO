@@ -18,7 +18,11 @@ const NumberField = ({
   id,
   config,
   ...rest
-}: NumberFieldProps & Omit<InputFieldWithButtonProps, "type" | "error">) => {
+}: NumberFieldProps &
+  Omit<
+    InputFieldWithButtonProps,
+    "type" | "error" | "onChange" | "onBlur" | "name"
+  >) => {
   const { register } = useFormContext();
   return (
     <InputFieldWithButton type="number" {...rest} {...register(id, config)} />

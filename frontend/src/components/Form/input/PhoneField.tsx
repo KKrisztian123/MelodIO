@@ -18,7 +18,7 @@ const PhoneField = ({
   id,
   config,
   ...rest
-}: Omit<InputFieldWithButtonProps, "type" | "error"> & PhoneFieldProps) => {
+}: Omit<InputFieldWithButtonProps, "type" | "error" | "onChange" | "onBlur" | "name"> & PhoneFieldProps) => {
   const { register } = useFormContext();
 
   const pattern = {

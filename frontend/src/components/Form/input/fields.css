@@ -7,7 +7,7 @@
   font-size: 0.8rem;
   margin:0;
   padding:5px;
-  display: inline-block;
+  display: block;
   padding-bottom: 15px;
   color: rgba(var(--ion-color-light-contrast-rgb), 0.5);
 }
@@ -63,6 +63,7 @@ button.inp-bait{
   background-color: var(--ion-color-light);
   display: inline-block;
   border-radius: 14px;
+  font-family: "Inter", Arial, Helvetica, sans-serif;
   box-shadow: var(--shadow-medium);
 }
 .inp .label {

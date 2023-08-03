@@ -1,0 +1,10 @@
+.profileImage{
+    position: relative;
+}
+.editButton{
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    z-index: 5;
+    transform:translate(-50%,50%);
+}

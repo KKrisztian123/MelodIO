@@ -1,0 +1,7 @@
+.networkStatus{
+    position: fixed;
+    left: 50%;
+    bottom: 90px;
+    transform: translateX(-50%);
+    z-index: 15;
+}

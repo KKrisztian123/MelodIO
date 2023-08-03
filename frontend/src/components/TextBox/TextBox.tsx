@@ -7,12 +7,14 @@ export type TextBoxProps = {
   title: string;
   /** Text box description */
   description?: string | ReactNode;
+  /** Optional className. */
+  className?: string;
 };
 
 /** Title description combo Text box. */
-const TextBox = ({ title, description }: TextBoxProps) => {
+const TextBox = ({ title, description, className }: TextBoxProps) => {
   return (
-    <div className={styles.textBox}>
+    <div className={className ? `${styles.textBox} ${className}` : styles.textBox }>
       <p className={styles.textBoxTitle}>{title}</p>
       {description && <p className={styles.textBoxDescription}>{description}</p>}
     </div>
