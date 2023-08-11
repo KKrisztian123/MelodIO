@@ -6,25 +6,27 @@ export type TextProps = {
   centered?: boolean;
   /** Optional className of the text. */
   className?: string;
+  /** When true it removes all margin from text. */
+  marginless?: boolean;
 };
 
 /** Paragraph text component */
 const Text = ({
   centered = false,
+  marginless = false,
   children,
   className = "",
 }: PropsWithChildren<TextProps>) => (
   <p
-    className={
-      centered
-        ? `${styles.text} ${styles.centered} ${className}`
-        : `${styles.text} ${className}`
-    }
+    className={[
+      styles.text,
+      centered ? styles.centered : undefined,
+      className,
+      marginless ? styles.marginless : undefined
+    ].join(" ")}
   >
     {children}
   </p>
 );
-
-
 
 export default Text;

@@ -9,7 +9,14 @@ import PageContent from "@components/Layout/Frame/PageContent/PageContent";
 import Content from "@components/Layout/Frame/ContentContainer/Content";
 import AccountInformation from "@components/AccountInformation/AccountInformation";
 import TextBox, { LinkTextBox } from "@components/TextBox/TextBox";
-import { useProfile } from "@features/Profile";
+import { useCurrentProfile } from "@features/Profile";
+import NewUserPage from "@features/Admin/routes/User/newUser";
+import {
+  AlbumsAdminPage,
+  ArtistsAdminPage,
+  SongsAdminPage,
+} from "@features/Admin";
+import { useSession } from "@features/Auth/Index";
 
 const SettingsPage: React.FC = () => {
   return (
@@ -21,6 +28,30 @@ const SettingsPage: React.FC = () => {
         component={Settings}
       />
       <AuthenticatedRoute
+        path={"/settings/new-user"}
+        type="horizontalSlide"
+        adminRoute
+        component={NewUserPage}
+      />
+      <AuthenticatedRoute
+        path={"/settings/artists/"}
+        type="horizontalSlide"
+        adminRoute
+        component={ArtistsAdminPage}
+      />
+      <AuthenticatedRoute
+        path={"/settings/albums/"}
+        type="horizontalSlide"
+        adminRoute
+        component={AlbumsAdminPage}
+      />
+      <AuthenticatedRoute
+        path={"/settings/songs/"}
+        type="horizontalSlide"
+        adminRoute
+        component={SongsAdminPage}
+      />
+      <AuthenticatedRoute
         path={"/settings/profile"}
         type="horizontalSlide"
         component={ProfilePage}
@@ -30,11 +61,12 @@ const SettingsPage: React.FC = () => {
         type="horizontalSlide"
         component={PasswordChangePage}
       />
-      <AuthenticatedRoute
+      {/** A web audio API-s reworknél kerül be. */}
+      {/* <AuthenticatedRoute
         path={"/settings/equalizer"}
         type="horizontalSlide"
         component={EqualizerPage}
-      />
+      /> */}
       <AuthenticatedRoute
         path={"/settings/endpoint"}
         type="horizontalSlide"
@@ -44,7 +76,8 @@ const SettingsPage: React.FC = () => {
   );
 };
 const Settings: React.FC = () => {
-  const profile = useProfile();
+  const profile = useCurrentProfile();
+  const { authLevel } = useSession();
   return (
     <IonPage>
       <PageContent hasExternalHeader>
@@ -56,18 +89,33 @@ const Settings: React.FC = () => {
           />
         </Content>
         <Content>
-          <TextBox title="Adminisztrátor" />
-          <LinkTextBox
-            title="Előadók"
-            description="Előadók létrehozása, szerkesztése és törlése."
-            to="./artists"
-          />
-          <LinkTextBox
-            title="Albumok és dalok"
-            description="Albumok és dalok létrehozása, szerkesztése és törlése."
-            to="./albums"
-          />
-          <TextBox title="Hang"/>
+          {authLevel === "admin" && (
+            <>
+              <TextBox title="Adminisztrátor" />
+              <LinkTextBox
+                title="Profil létrehozása"
+                description="Felhasználói profil létrehozása."
+                to="./new-user"
+              />
+              <LinkTextBox
+                title="Előadók"
+                description="Előadók létrehozása és szerkesztése."
+                to="./artists"
+              />
+              <LinkTextBox
+                title="Albumok"
+                description="Albumok létrehozása és szerkesztése."
+                to="./albums"
+              />
+              <LinkTextBox
+                title="Dalok"
+                description="Dalok létrehozása és szerkesztése."
+                to="./songs"
+              />
+            </>
+          )}
+
+          {/* <TextBox title="Hang" />
           <LinkTextBox
             title="Hangszínszabályzó"
             description="A hangszínszabályzó beállítása."
@@ -77,8 +125,8 @@ const Settings: React.FC = () => {
             title="Lejátszás"
             description="A lejátszó beállításai."
             to="./player"
-          />
-          <TextBox title="Felhasználó"/>
+          /> */}
+          <TextBox title="Felhasználó" />
           <LinkTextBox
             title="Profil Szerkesztése"
             description="Felhasználói profil adatainak szerkesztése."
@@ -96,7 +144,7 @@ const Settings: React.FC = () => {
           />
           <LinkTextBox
             title="Kijelentkezés"
-            description={`Be vagy jelentkezve mint: ${"Kucsera Krisztián"}.`}
+            description={`Be vagy jelentkezve mint: ${profile.name}.`}
             to="/logout"
           />
         </Content>

@@ -1,16 +1,7 @@
-import PropTypes from "prop-types";
 import { FormProvider } from "react-hook-form";
 import type { FieldValues } from "react-hook-form";
-import useFormWrapper from "../../hooks/useFormWrapper";
+import useFormWrapper from "../../hooks/useForm";
 import type { PropsWithChildren, DOMAttributes } from "react";
-
-/**
- * Custom form component with a built in inputhandler.
- * @param {func} onSubmit - Function to be executed on form submission.
- * @param {func} onChange - Optional function to be executed on form value changes.
- * @param {object} defaultValues - Optional defaultValues for the inputfields.
- *
- */
 
 export type FormProps = {
   /** An optional callback function for form changes. */
@@ -44,14 +35,3 @@ const Form = ({
   );
 };
 export default Form;
-
-Form.propTypes = {
-  /** Sets default values for the inputs, the input ids are used as the object keys */
-  defaultValues: PropTypes.object,
-
-  /** function to execute on form submit */
-  onSubmit: PropTypes.func.isRequired,
-
-  /** function to execute on form input changes */
-  onChange: PropTypes.func,
-};

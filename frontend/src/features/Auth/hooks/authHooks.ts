@@ -8,22 +8,19 @@ import { useDispatch, useSelector } from "react-redux";
 import { clearAuth, setAuth } from "../authSlice";
 import { Auth, Login } from "../types";
 import { useAxios } from "@hooks/useFetch";
-import useError from "@hooks/useError";
+import { useAnimatedError } from "@hooks/useError";
 import { RootState } from "@/store";
+import { responseHandler } from "@/utils/utils";
 
 /** Login hook */
 export const useLogin = () => {
   const { set } = useConfigureSession();
   const [fetch, loading] = useAxios("POST", "/login");
-  const { ref, showError, errorContent } = useError();
+  const { ref, showError, errorContent } = useAnimatedError();
 
   const login = (v: Login) =>
     fetch(v)
-      .then((res: APIResponse<Auth>) => {
-        res?.status === "success"
-          ? set(res?.payload)
-          : showError(res?.message || true);
-      })
+      .then((res: APIResponse<Auth>) => responseHandler(res, showError, set))
       .catch(() => showError(true));
 
   return { login, loading, errorRef: ref, errorContent };
@@ -53,7 +50,7 @@ export const useInitSession = () => {
 const LoggedOut: Auth = {
   session: false,
   authLevel: false,
-  userId: false
+  userId: false,
 };
 
 /** Logout hook */

@@ -1,0 +1,7 @@
+.swiper .swiper-slide.swiper-slide-active{
+    transform: scale(1) !important;
+}
+.swiper .swiper-slide{
+    transform: scale(0.8) !important;
+    transition: transform 250ms ease-in-out;
+}

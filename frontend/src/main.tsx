@@ -5,6 +5,10 @@ import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { store } from './store';
 import { initializeBaseUrl } from '@features/ServerEndpoint';
+import { register } from 'swiper/element/bundle';
+//registering custom swiper elements.
+register();
+
 
 if (process.env.NODE_ENV === 'development') {
   const { worker } = await import('./mocks/browser');

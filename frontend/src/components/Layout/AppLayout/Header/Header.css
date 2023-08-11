@@ -22,11 +22,12 @@
   height: 100%;
   position: absolute;
   top: 0;
-  background: rgba(var(--ion-color-light-rgb),0.8);
+  background: rgba(var(--ion-color-light-rgb),0.85);
   opacity: 1;
   transform: translate3d(0,0,0);
   backdrop-filter: blur(40px);
   transition: opacity 200ms ease-in-out;
+  box-shadow: var(--shadow-medium);
 }
 .mobile-header.transparent .header-backdrop{
   opacity: 0;

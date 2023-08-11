@@ -10,8 +10,9 @@ import Title from "./Title/Title";
 import { Link } from "react-router-dom";
 import ProfileImage from "../../ProfileImage/ProfileImage";
 import BackButton from "../BackButton";
-import tempImage from "@assets/photo-1544005313-94ddf0286df2.webp";
-import { useProfile } from "@features/Profile";
+import { useCurrentProfile } from "@features/Profile";
+import { motion } from "framer-motion";
+
 /** Main App Layout */
 const Layout = ({ children }: PropsWithChildren) => {
   return (
@@ -43,28 +44,36 @@ export default Layout;
 /** Main layout header */
 const LayoutHeader = () => {
   const location = useMainLocation();
-  const profile = useProfile();
+  const profile = useCurrentProfile();
   const route = routes.find(
     (route) => route.path.replaceAll("/", "") === location.replaceAll("/", "")
   );
 
   return (
     <>
-      {!route?.headerProps?.noHeader && (
+      <motion.div
+        animate={route?.headerProps?.noHeader ? { opacity: 0 } : { opacity: 1 }}
+        transition={{ duration: 0.4, ease: "easeInOut" }}
+      >
         <Header
           transparent={route?.headerProps?.transparent}
           leftOrnament={route?.headerProps?.showBackButton && <BackButton />}
           rightOrnament={
-            !route?.headerProps?.hideProfileImage && (
+            !route?.headerProps?.hideProfileImage &&
+            !route?.headerProps?.noHeader && (
               <Link to={"/settings/"}>
-                <ProfileImage size="small" name="asd" image={profile.image} />
+                <ProfileImage
+                  size="small"
+                  name={profile.name}
+                  image={profile.image}
+                />
               </Link>
             )
           }
         >
           <Title title={route?.title} letterKeys={route?.path} />
         </Header>
-      )}
+      </motion.div>
     </>
   );
 };

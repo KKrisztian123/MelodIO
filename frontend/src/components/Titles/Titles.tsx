@@ -41,6 +41,7 @@ export const H2 = ({
   centered = false,
   colours = "auto",
   hasShadow = false,
+  className,
   ...rest
 }: PropsWithChildren<TitleProps>) => (
   <h2
@@ -50,6 +51,7 @@ export const H2 = ({
       centered ? styles.centered : null,
       styles[colours],
       hasShadow ? styles.shadow : null,
+      className,
     ].join(" ")}
   >
     {children}
@@ -62,6 +64,7 @@ export const H3 = ({
   centered = false,
   colours = "auto",
   hasShadow = false,
+  className,
   ...rest
 }: PropsWithChildren<TitleProps>) => (
   <h3
@@ -71,6 +74,7 @@ export const H3 = ({
       centered ? styles.centered : null,
       styles[colours],
       hasShadow ? styles.shadow : null,
+      className,
     ].join(" ")}
   >
     {children}
@@ -83,6 +87,7 @@ export const H4 = ({
   centered = false,
   colours = "auto",
   hasShadow = false,
+  className,
   ...rest
 }: PropsWithChildren<TitleProps>) => (
   <h4
@@ -92,6 +97,7 @@ export const H4 = ({
       centered ? styles.centered : null,
       styles[colours],
       hasShadow ? styles.shadow : null,
+      className,
     ].join(" ")}
   >
     {children}

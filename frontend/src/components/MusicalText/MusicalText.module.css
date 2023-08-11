@@ -1,0 +1,16 @@
+.musicalType{
+    position: relative;
+    margin-right: 10px;
+    display: inline-block;
+}
+.musicalType::after{
+    content: "";
+    position: absolute;
+    width: 2px;
+    height: 10px;
+    border-radius: 2px;
+    background-color: var(--ion-color-light-contrast);
+    top: 50%;
+    right: 0;
+    transform: translate(6px,-50%);
+}

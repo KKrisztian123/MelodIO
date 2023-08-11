@@ -15,7 +15,7 @@ export const emptyUserStorage: StorageProfile = {
   email: "",
   image: false,
   imageType: false,
-  lastUpdate: new Date(),
+  lastUpdate: new Date().toJSON(),
 };
 
 /** Saves profile data to storage. */

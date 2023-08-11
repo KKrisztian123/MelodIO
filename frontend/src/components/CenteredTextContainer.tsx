@@ -12,26 +12,26 @@ export type CenteredTextContainer = TextBoxProps & {
 const CenteredTextContainer: FC<CenteredTextContainer> = ({
   title,
   description,
-  visible=true,
+  visible = true,
 }) => {
   return (
     <AnimatePresence initial={false}>
       {visible && (
         <motion.div
-          initial={{ opacity: 0, top: 20 }}
-          animate={{ opacity: 1, top: 0 }}
-          exit={{ opacity: 0, top: 20 }}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: 20 }}
           className={styles.container}
         >
-          <TextBox
-            title={title}
-            description={
-              <span className={styles.containerTextDescription}>
-                {description}
-              </span>
-            }
-            className={styles.containerText}
-          />
+            <TextBox
+              title={title}
+              description={
+                <span className={styles.containerTextDescription}>
+                  {description}
+                </span>
+              }
+              className={styles.containerText}
+            />
         </motion.div>
       )}
     </AnimatePresence>

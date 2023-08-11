@@ -4,55 +4,78 @@ type APIResponse<T> =
   | { status: "success"; payload: T }
   | { status: "error"; message: string };
 
-type FormImage = string | File;
+type FormFile = string | File;
 
-type FormImageOptional = FormImage | false;
+type FormFileOptional = FormFile | false;
 
 /** Image list on image upload. */
 type ImageList = Image[];
 
 /** Image list on optional image upload. */
-type ImageListOptional = FormImageOptional[];
+type ImageListOptional = FormFileOptional[];
 
+type httpMethods = "GET" | "POST" | "PUT" | "DELETE";
 
 type SearchResult = Album | Song | Playlist;
 
 type Album = {
-  id:string;
-  title: string;
-  author: author;
+  id: string;
+  name: string;
+  author: Author[id][];
   type: "Album" | "Kislemez";
   favorite: boolean;
-}
+  image: string;
+};
+
+/** Album type without user state */
+type StatelessAlbum = Omit<Album, "favorite">;
 
 type Song = {
   id: string;
-  title: string;
-  author: author;
-  AlbumId: string;
+  name: string;
+  author: Author[id][];
+  album: string;
   type: "Dal";
   favorite: boolean;
-}
+  fileType: string;
+};
+
+
+type MergedAlbum = Album & {
+  author: Author[];
+};
+
+type MergedSong = Song & {
+  author: Author[];
+  album: Album;
+};
+
+/** Song type without user state */
+type StatelessSong = Omit<Song, "favorite">;
 
 type Playlist = {
-  id:string;
-  title: string;
-  author: author;
-  type: "Album" | "Kislemez";
-}
-
-type author = {
   id: string;
   name: string;
-}
+  author: Author[id][];
+};
 
-//search egy külön feature
-// Searchel kezdünk holnap, átnézzük ezket a typeokat aztán kitaláljuk hogy lenne jó ráhúzni erre a gecire
-// kilistázni
-// likeolásra megírni a hookot
-// igazából lehet olyan hook kéne ami ezeket a típusú listákat kezeli
-// mock endpoint likeolásra optimistic likeolás => belikeolja, elküldi a responset ha a response success úgyhagyja ha nem akkor visszaállítja
+type Author = {
+  id: string;
+  name: string;
+  image: string;
+};
 
-//utána megcsináljuk a nincs internet popupot -> külön feature
+type AlbumContents = {
+  result: Album & {
+    songs: Song[];
+  };
+  authorList: Author[];
+};
 
-//album fül, same as lejátszási lista  (pl.: song groups feature)
+type PlayListContents = {
+  result: Playlist & {
+    songs: Song[];
+  };
+  authorList: Author[];
+  albumList: Album[];
+};

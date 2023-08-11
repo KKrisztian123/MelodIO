@@ -17,6 +17,7 @@ export const EndpointManager = () => {
       <FullScreenModal
         title="Végpont beállítása"
         isOpen={toggle}
+        noCloseButton
         changeOpen={setToggle}
       >
         <ConfigureEndpoint onFinish={setToggle} />

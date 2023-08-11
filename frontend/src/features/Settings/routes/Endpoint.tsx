@@ -4,7 +4,7 @@ import Header from "@components/Layout/AppLayout/Header/Header";
 import BackButton from "@components/Layout/BackButton";
 import PageContent from "@components/Layout/Frame/PageContent/PageContent";
 import Content from "@components/Layout/Frame/ContentContainer/Content";
-import { EndpointConfiguration } from "@/features/ServerEndpoint";
+import { EndpointConfiguration } from "@features/ServerEndpoint";
 
 const EndpointPage: FC = () => {
   return (

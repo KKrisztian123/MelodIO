@@ -4,7 +4,7 @@ import { useCallback, useMemo, useReducer } from "react";
 import useSWR, { SWRConfiguration } from "swr";
 
 /** Handler for modifying request data. */
-export type dataHandler = (data: object) => unknown;
+export type dataHandler = (data: APIResponse<any>) => any;
 
 type configProps = {
   isError: boolean;
@@ -48,17 +48,21 @@ const fetcher = (
   method: string,
   url: string,
   data: object,
-  config: { dataHandler?: dataHandler; headers?: object }
+  config: { dataHandler?: dataHandler; headers?: object; params?: object }
 ) =>
-  axios({ method: method, url: url, data: data, headers: config.headers }).then(
-    (res) => (config.dataHandler ? config.dataHandler(res.data) : res.data)
+  axios({
+    method: method,
+    url: url,
+    data: data,
+    headers: config.headers,
+    params: config.params,
+  }).then((res) =>
+    config.dataHandler ? config.dataHandler(res.data) : res.data
   );
-
-type methods = "GET" | "POST" | "PUT" | "DELETE";
 
 /** Custom hook for sending data without caching. */
 export const useAxios = (
-  method: methods,
+  method: httpMethods,
   url: string,
   dataHandler?: dataHandler
 ) => {
@@ -70,14 +74,16 @@ export const useAxios = (
   );
 
   const fetchWrapper = useCallback(
-    async (data: object) => {
+    async (data: object, params?: object, urlAlt?: string) => {
       dispatch({ type: actionKinds.LOADING, payload: true });
 
-      return fetcher(method, url, data, { dataHandler, headers }).finally(
-        () => {
-          dispatch({ type: actionKinds.LOADING, payload: false });
-        }
-      );
+      return fetcher(method, url, data, {
+        dataHandler,
+        headers,
+        params,
+      }).finally(() => {
+        dispatch({ type: actionKinds.LOADING, payload: false });
+      });
     },
     [dataHandler, headers, method, url]
   );
@@ -88,14 +94,47 @@ export const useAxios = (
   ];
 };
 
+/** Custom hook for sending data without caching. */
+export const useAxiosWithUrl = (
+  method: httpMethods,
+  dataHandler?: dataHandler
+) => {
+  const [state, dispatch] = useReducer(stateReducer, initialConfigState);
+  const { session } = useSession();
+  const headers = useMemo(
+    () => (session ? { Authorization: `Bearer ${session}` } : {}),
+    [session]
+  );
+
+  const fetchWrapper = useCallback(
+    async (url: string, data: object, params?: object) => {
+      dispatch({ type: actionKinds.LOADING, payload: true });
+
+      return fetcher(method, url, data, {
+        dataHandler,
+        headers,
+        params,
+      }).finally(() => {
+        dispatch({ type: actionKinds.LOADING, payload: false });
+      });
+    },
+    [dataHandler, headers, method]
+  );
+
+  return [fetchWrapper, state.isLoading] as [
+    fetch: typeof fetchWrapper,
+    loading: typeof state.isLoading
+  ];
+};
+
 /** Custom hook for fetching and caching data.  */
 export const useFetch = (
-  method = "GET",
+  method: httpMethods,
   endpoint: string,
   {
-    swrOptions: { ...options },
+    swrOptions: { ...options } = {},
     dataHandler: dataHandler,
-  }: { swrOptions: SWRConfiguration; dataHandler: dataHandler }
+  }: { swrOptions?: SWRConfiguration; dataHandler?: dataHandler } = {}
 ) => {
   const { session } = useSession();
   const headers = session ? { Authorization: `Bearer ${session}` } : {};
@@ -105,38 +144,10 @@ export const useFetch = (
   const { data, error, isLoading } = useSWR(endpoint, wrappedFetcher, {
     ...options,
   });
-  return [data, error, isLoading];
+
+  return [data, error, isLoading] as [
+    typeof data,
+    typeof error,
+    typeof isLoading
+  ];
 };
-
-// /** Custom hook for sending data without caching. */
-// export const useAxios = (
-//   method: methods,
-//   url: string,
-//   dataHandler?: dataHandler
-// ) => {
-//   const [state, dispatch] = useReducer(stateReducer, initialConfigState);
-//   const [dataState, setData] = useState<APIResponse<object> | false>(false);
-
-//   const fetchWrapper = async (data: object) => {
-//     //dispatch({ type: actionKinds.RESET, payload: false });
-//     dispatch({ type: actionKinds.LOADING, payload: true });
-
-//     try {
-//       const res = await fetcher(method, url, data, dataHandler);
-//       dispatch({ type: actionKinds.ERROR, payload: false });
-//       setData(res);
-//       return res;
-//     } catch (error) {
-//       dispatch({ type: actionKinds.ERROR, payload: true });
-//     } finally {
-//       dispatch({ type: actionKinds.LOADING, payload: false });
-//     }
-//   };
-
-//   return [fetchWrapper, dataState, state.isLoading, state.isError] as [
-//     fetch: typeof fetchWrapper,
-//     result: typeof dataState,
-//     loading: typeof state.isLoading,
-//     error: typeof state.isError
-//   ];
-// };

@@ -1,7 +1,7 @@
-import { useProfileManager } from "../hooks/useProfile";
+import { useCurrentProfileManager } from "../hooks/useCurrentProfile";
 
 /** Manages Profile information in state. */
 export const ProfileManager = () => {
-  useProfileManager();
+  useCurrentProfileManager();
   return null;
 };

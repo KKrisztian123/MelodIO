@@ -1,0 +1,8 @@
+.slideContainer{
+    width: 100%;
+    margin: 0 auto;
+}
+.swiperFix{
+    width: 100%;
+    overflow: visible !important;
+}

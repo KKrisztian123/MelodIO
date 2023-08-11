@@ -6,6 +6,7 @@ import {
   motion,
   type TargetAndTransition,
   type AnimationControls,
+  MotionStyle,
 } from "framer-motion";
 import styles from "./AnimatedRoute.module.css";
 import useRouteContext from "../../../hooks/useRouteContext";
@@ -84,6 +85,7 @@ const AnimationConfig: {
 export type AnimatedRouteProps = Omit<RouteProps, "component"> & {
   component?: FC;
   type?: "auto" | keyof typeof AnimationConfig;
+  style?: MotionStyle; 
 };
 /** Animated react router route. */
 const AnimatedRoute = ({
@@ -91,6 +93,7 @@ const AnimatedRoute = ({
   path,
   type = "auto",
   component: Component,
+  style = {},
   ...rest
 }: PropsWithChildren<AnimatedRouteProps>) => {
   const level = useRouteContext();
@@ -109,7 +112,7 @@ const AnimatedRoute = ({
         animate={animations.animate}
         exit={animations.exit}
         transition={{ duration: 0.25 }}
-        style={{ background: "#fff" }}
+        style={{ background: "#fff" , ...style}}
       >
         {Component && <Component />}
         {children}

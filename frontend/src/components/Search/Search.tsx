@@ -3,7 +3,7 @@ import "./Search.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 
-export type SearchProps = {
+export type SearchFieldProps = {
   /** Optional placeholder text inside searchbox. */
   placeholder?: string;
   /** Sets the input debounce time in miliseconds. */
@@ -15,12 +15,12 @@ export type SearchProps = {
 };
 
 /** A debounced searchbox. */
-const Search = ({
+const SearchField = ({
   placeholder = "Keresés",
   debounce = 300,
   disabled = false,
   onChange,
-}: SearchProps) => {
+}: SearchFieldProps) => {
   return (
     <div className="search-container">
       <IonSearchbar
@@ -39,4 +39,4 @@ const Search = ({
     </div>
   );
 };
-export default Search;
+export default SearchField;

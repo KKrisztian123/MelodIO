@@ -22,7 +22,7 @@ const ProfileImage = ({ image, name, size = "large" }: ProfileImageProps) => {
   return (
     <div className={styles.profileImage}>
       {/** vagy a monogram egy sötétes szürkés háttéren vagy profile picture */}
-      {image ? (
+      {image && image !== "false" ? (
         <ImageComponent
           src={image}
           style={{ aspectRatio: 1 }}

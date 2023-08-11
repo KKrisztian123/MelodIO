@@ -1,38 +1,31 @@
 import { IonPage } from "@ionic/react";
-import CenteredTextContainer from "../components/CenteredTextContainer";
 import "./Search.css";
 import PageContent from "../components/Layout/Frame/PageContent/PageContent";
-import Search from "../components/Search/Search";
-import Content from "../components/Layout/Frame/ContentContainer/Content";
-import { useState } from "react";
+import { Search, useSearch, useSearchContext } from "@features/Search";
 
 const SearchPage: React.FC = () => {
-  const [result, setResult] = useState<false | []>(false);
+  const search = useSearch("search", { method: "GET", endpoint: "/search" });
   
-  const fetchResult = (e: { target: { value: string } }) => {
-    const value = e.target.value.trim();
-    setResult(value ? []: false);
-  };
-
   return (
-    <IonPage>
-      <PageContent hasExternalHeader>
-        <Content>
-          <Search
-            onChange={fetchResult}
-            placeholder="Előadók, albumok és dalok"
-          />
-        </Content>
-        <Content>
-          <CenteredTextContainer
-            visible={result === false}
-            title="Kezdj keresni"
-            description="Keress rá előadókra, dalokra és albumokra."
-          />
-        </Content>
+    <IonPage >
+      <PageContent hasExternalHeader fullWidth>
+        <Search
+          {...search}
+          placeholder="Előadók, albumok és dalok"
+          emptyText="Kezdj keresni"
+          emptyDescription={"Keress rá előadókra, dalokra és albumokra."}
+        >
+          <SearchResult/>
+        </Search>
       </PageContent>
     </IonPage>
   );
+};
+
+const SearchResult = () => {
+  const {result} = useSearchContext();
+  console.log(result)
+  return <div></div>;
 };
 
 export default SearchPage;

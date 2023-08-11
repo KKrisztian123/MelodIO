@@ -1,14 +1,16 @@
 import type { FC } from "react";
-import AlbumsPage from "./pages/Albums/Index";
 import ExplorePage from "./pages/Explore";
-import PlaylistsPage from "./pages/Playlists";
+import { PlaylistsPage, LikedSongsPage } from "@features/SongGroups";
 import SearchPage from "./pages/Search";
 import { HeaderProps } from "./components/Layout/AppLayout/Header/Header";
 import { SettingsPage } from "@features/Settings/Index";
 import LoginPage from "./pages/Login";
 import AuthenticatedRoute from "@components/Layout/Routing/AuthenticatedRoute";
-import AnimatedRoute, { AnimatedRouteProps } from "@components/Layout/Routing/AnimatedRoute";
+import AnimatedRoute, {
+  AnimatedRouteProps,
+} from "@components/Layout/Routing/AnimatedRoute";
 import LogoutPage from "./pages/Logout";
+import { AlbumsPage, AlbumPage } from "@features/SongGroups";
 
 /** Main Application Routes */
 export default [
@@ -35,8 +37,20 @@ export default [
     component: AlbumsPage,
     routeComponent: AuthenticatedRoute,
     title: "Albumok",
+    props: {
+      exact: true,
+    },
     headerProps: {
       transparent: true,
+    },
+  },
+  {
+    path: "/albums/:albumId",
+    component: AlbumPage,
+    routeComponent: AuthenticatedRoute,
+    title: "Album",
+    props: {
+      style: { zIndex: 1 },
     },
   },
   {
@@ -59,29 +73,41 @@ export default [
     path: "/playlists/",
     component: PlaylistsPage,
     routeComponent: AuthenticatedRoute,
+    props: {
+      exact: true,
+    },
     title: "Lejátszási Listák",
+  },
+  {
+    path: "/playlists/liked-songs",
+    component: LikedSongsPage,
+    routeComponent: AuthenticatedRoute,
+    title: "Kedvelt Dalok",
+    props: {
+      style: { zIndex: 1 },
+    },
   },
   {
     path: "/login/",
     component: LoginPage,
     routeComponent: AnimatedRoute,
     title: "Bejelentkezés",
-    headerProps:{
+    headerProps: {
       hideProfileImage: true,
       transparent: true,
       noHeader: true,
-    }
+    },
   },
   {
     path: "/logout/",
     component: LogoutPage,
     routeComponent: AnimatedRoute,
-    title: "Bejelentkezés",
-    headerProps:{
+    title: "Kijelentkezés",
+    headerProps: {
       hideProfileImage: true,
       transparent: true,
       noHeader: true,
-    }
+    },
   },
   {
     path: "*",
@@ -98,5 +124,9 @@ export default [
   headerProps?: Omit<
     HeaderProps,
     "leftOrnament" | "rightOrnament" | "children"
-  > & { hideProfileImage?: boolean; showBackButton?: boolean, noHeader?: boolean };
+  > & {
+    hideProfileImage?: boolean;
+    showBackButton?: boolean;
+    noHeader?: boolean;
+  };
 }[];

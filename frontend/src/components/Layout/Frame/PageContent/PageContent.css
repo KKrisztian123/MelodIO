@@ -12,3 +12,8 @@ ion-app ion-content.page-content-container{
 .page-content-container .header-placeholder{
     height: 88px;
 }
+.page-content-container.full-width .page-content-padding{
+    padding-left: 0;
+    padding-right: 0;
+    width: 100%;
+}

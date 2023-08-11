@@ -2,6 +2,18 @@
     padding: 10px 0;
     color: var(--ion-color-light-contrast);
 }
+.textBoxLarge{
+    text-align: center;
+    padding-top: 35px;    
+}
+
+.textBoxLarge .textBoxTitle{
+     margin-bottom: 5px;
+     font-weight: bold;
+}
+.textBoxLarge .textBoxDescription{
+    font-size: 1rem;
+}
 
 .textBoxTitle{
     font-weight: 600;

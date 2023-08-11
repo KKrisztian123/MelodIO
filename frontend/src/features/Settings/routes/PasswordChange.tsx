@@ -4,7 +4,7 @@ import BackButton from "@components/Layout/BackButton";
 import Content from "@components/Layout/Frame/ContentContainer/Content";
 import PageContent from "@components/Layout/Frame/PageContent/PageContent";
 import { IonPage } from "@ionic/react";
-import type { FC } from "react";
+import { useState, type FC } from "react";
 import { usePasswordChange } from "../hooks/passwordChange";
 import { FormBlock, FormFlex } from "@components/Form/FormBlocks";
 import PasswordField from "@components/Form/input/PasswordField";
@@ -13,10 +13,12 @@ import Button from "@components/Button/Button";
 import { ErrorText } from "@components/Text/ErrorText";
 import { FullScreenLoader } from "@components/Loaders/Loaders";
 import { useHistory } from "react-router";
+import { isMatching } from "@/utils/utils";
 
 const PasswordChangePage: FC = () => {
   const { changePassword, loading, errorRef, errorContent } =
     usePasswordChange();
+  const [values, setValues] = useState({});
   const history = useHistory();
   return (
     <IonPage>
@@ -25,7 +27,12 @@ const PasswordChangePage: FC = () => {
       </Header>
       <PageContent>
         <Content>
-          <Form onSubmit={(v)=>changePassword(v).then(status=> status && history.goBack())}>
+          <Form
+            onSubmit={(v) =>
+              changePassword(v).then((status) => status && history.goBack())
+            }
+            onChange={setValues}
+          >
             <FormFlex>
               <FormBlock>
                 <PasswordField
@@ -44,6 +51,11 @@ const PasswordChangePage: FC = () => {
                   label="Új jelszó"
                   config={{
                     required: { value: true, message: "" },
+                    minLength: {
+                      value: 8,
+                      message:
+                        "A jelszónak legalább 8 karakter hosszúnak kell lennie.",
+                    },
                   }}
                 />
               </FormBlock>
@@ -55,6 +67,16 @@ const PasswordChangePage: FC = () => {
                   label="Új jelszó ismét"
                   config={{
                     required: { value: true, message: "" },
+                    minLength: {
+                      value: 8,
+                      message:
+                        "A jelszónak legalább 8 karakter hosszúnak kell lennie.",
+                    },
+                    validate: {
+                      matches: (v) =>
+                        isMatching(values.newPassword, v) ||
+                        "Az új jelszavak nem egyeznek.",
+                    },
                   }}
                 />
               </FormBlock>

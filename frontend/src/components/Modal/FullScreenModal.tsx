@@ -64,52 +64,54 @@ const FullScreenModal = ({
   const value = typeof isOpen !== "undefined" ? isOpen : open;
   const change = changeOpenProp || changeOpen;
   return (
-    createPortal(
     <>
       {isValidElement(triggerComponent) &&
         cloneElement(triggerComponent as ReactElement<ButtonProps>, {
           onClick: () => change(true),
         })}
-      <AnimatePresence>
-        {value && (
-          <motion.div
-            className={styles.fullScreenModal}
-            initial={AnimationConfig.initial}
-            animate={AnimationConfig.animate}
-            exit={AnimationConfig.exit}
-            transition={{ duration: 0.4, type: "spring" }}
-          >
-            <Header
-              transparent
-              leftOrnament={
-                noCloseButton && (
-                  <IconButton
-                    label="Bezár"
-                    icon={faXmark}
-                    type="tertiary"
-                    size="extraLarge"
-                    onClick={() => change(false)}
-                  />
-                )
-              }
+      {createPortal(
+        <AnimatePresence>
+          {value && (
+            <motion.div
+              className={styles.fullScreenModal}
+              initial={AnimationConfig.initial}
+              animate={AnimationConfig.animate}
+              exit={AnimationConfig.exit}
+              transition={{ duration: 0.4, type: "spring" }}
             >
-              {title}
-            </Header>
-            <div>
-              {children}
-              <ButtonContainer>
-                {isValidElement(closeComponent) &&
-                  cloneElement(closeComponent as ReactElement<ButtonProps>, {
-                    onClick: () => {
-                      change(false);
-                    },
-                  })}
-              </ButtonContainer>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </>,document.body)
+              <Header
+                transparent
+                leftOrnament={
+                  !noCloseButton && (
+                    <IconButton
+                      label="Bezár"
+                      icon={faXmark}
+                      type="tertiary"
+                      size="extraLarge"
+                      onClick={() => change(false)}
+                    />
+                  )
+                }
+              >
+                {title}
+              </Header>
+              <div>
+                {children}
+                <ButtonContainer>
+                  {isValidElement(closeComponent) &&
+                    cloneElement(closeComponent as ReactElement<ButtonProps>, {
+                      onClick: () => {
+                        change(false);
+                      },
+                    })}
+                </ButtonContainer>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>,
+        document.body
+      )}
+    </>
   );
 };
 

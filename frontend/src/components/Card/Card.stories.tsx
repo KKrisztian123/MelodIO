@@ -1,7 +1,7 @@
 import type { Meta, StoryFn } from "@storybook/react";
 import Card from "./Card";
 import CardBox from "../CardBox/CardBox";
-import AlbumText from "../AlbumText/AlbumText";
+import AlbumText from "../MusicalText/MusicalText";
 import { IconButton } from "../Button/Button";
 import { faPlay } from "@fortawesome/free-solid-svg-icons";
 

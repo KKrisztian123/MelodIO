@@ -6,8 +6,8 @@ export type Profile = {
   email: string;
   /** Optional profile image of the user in base64. */
   image: string | false;
-  /** Last update date. */
-  lastUpdate: Date;
+  /** Serialized last update date. */
+  lastUpdate: string;
 };
 
 /** User profile information returned from storage. */
@@ -21,6 +21,6 @@ export type ProfileRequest = {
     email: string;
     /** Optional profile image of the user . */
     image: ImageListOptional;
-    /** Last update date. */
-    lastUpdate: Date;
+    /** Serialized last update date. */
+    lastUpdate: string;
 }

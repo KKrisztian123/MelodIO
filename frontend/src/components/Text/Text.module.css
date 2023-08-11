@@ -4,3 +4,7 @@
 .centered{
     text-align: center;
 }
+.marginless{
+    margin: 0;
+    margin-bottom: 5px;
+}

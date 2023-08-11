@@ -2,7 +2,7 @@
 import { useCallback, useEffect, useState } from "react";
 import useToggle from "./useToggle";
 import Compressor from "compressorjs";
-import { isImageFile } from "@/utils/utils";
+import { isFile } from "@/utils/utils";
 
 type configType = {
   quality?: number;
@@ -30,7 +30,7 @@ const compressFiles = async (
   const compressedFiles: ImageListOptional = [];
   for (const blob of files) {
     compressedFiles.push(
-      isImageFile(blob)
+      isFile(blob)
         ? new File(
             [await compressor(blob as File, { quality, mimeType })],
             //@ts-ignore

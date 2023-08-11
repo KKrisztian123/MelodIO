@@ -1,7 +1,12 @@
 import { IonHeader, IonTitle, IonToolbar } from "@ionic/react";
-import type { PropsWithChildren, ReactNode } from "react";
+import {
+  type PropsWithChildren,
+  type ReactNode,
+} from "react";
 import "./Header.css";
 import { AnimatePresence, motion } from "framer-motion";
+import { useSelector } from "react-redux";
+import { RootState } from "@/store";
 
 export type HeaderProps = {
   /** Optional left side ornament */
@@ -18,12 +23,13 @@ const Header = ({
   rightOrnament,
   transparent = false,
 }: PropsWithChildren<HeaderProps>) => {
+  const scrolled = useSelector((state: RootState) => state.app.scrolled);
+  const isTransparent = transparent ? transparent : !scrolled;
   return (
     <IonHeader
-      className={transparent ? "mobile-header transparent" : "mobile-header"}
+      className={isTransparent ? "mobile-header transparent" : "mobile-header"}
     >
       <div className="header-backdrop"></div>
-
       <IonToolbar>
         <AnimatePresence>
           {leftOrnament && (

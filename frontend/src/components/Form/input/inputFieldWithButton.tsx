@@ -66,7 +66,7 @@ const InputFieldWithButton = forwardRef<
             />
             <span className="label">{label}</span>
             <span className="focus-bg"></span>
-            {true && <span className="right-ornament">{rightOrnament}</span>}
+            {rightOrnament && <span className="right-ornament">{rightOrnament}</span>}
           </label>
         </div>
         <motion.p

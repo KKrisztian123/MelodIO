@@ -9,7 +9,7 @@
     outline: unset;
     border: unset;
     box-shadow: var(--shadow-medium);
-    background: #ffffffaa;
+    background: rgba(var(--ion-color-light-rgb),0.85);
     backdrop-filter: blur(40px);
     height: 60px;
     display: flex;

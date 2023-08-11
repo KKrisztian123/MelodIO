@@ -10,6 +10,7 @@ const NetworkManager = () => {
 
   return (
     <motion.div
+      initial={{ opacity: 0 }}
       animate={
         network.connected
           ? {

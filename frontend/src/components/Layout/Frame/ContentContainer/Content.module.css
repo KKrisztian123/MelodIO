@@ -10,3 +10,10 @@
     align-items: center;
     justify-content: center;
 }
+.content.sidePadded{
+    margin-left: auto;
+    margin-right: auto;
+    width: 95%;
+    padding-left: 20px;
+    padding-right: 20px;
+}

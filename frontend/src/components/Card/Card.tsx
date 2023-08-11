@@ -16,10 +16,25 @@ export type CardProps = {
 };
 
 /** Card with background image */
-const Card = ({ src, alt, bottomOrnament, topOrnament, ambientLight }: CardProps) => {
+const Card = ({
+  src,
+  alt,
+  bottomOrnament,
+  topOrnament,
+  ambientLight,
+}: CardProps) => {
   return (
     <div className={styles.card}>
-      <Image src={src} alt={alt} behaviour="cover" height={"100%"} width={"100%"} ambientLight={ambientLight} />
+      <Image
+        src={src}
+        alt={alt}
+        behaviour="cover"
+        height={"100%"}
+        width={"100%"}
+        borderRadius={37}
+        ambientLight={ambientLight}
+        style={{aspectRatio:16/10}}
+      />
       <div className={styles.cardOverlay}>
         <div className={styles.bottomShadow}></div>
       </div>
@@ -30,6 +45,5 @@ const Card = ({ src, alt, bottomOrnament, topOrnament, ambientLight }: CardProps
     </div>
   );
 };
-
 
 export default Card;

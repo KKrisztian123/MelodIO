@@ -1,3 +1,12 @@
+.item button{
+    background:transparent;
+    outline: unset;
+    cursor: pointer;
+    text-align: unset;
+    padding: unset;
+    font-size: 1rem;
+    line-height: normal;
+}
 .itemInformation{
     display: flex;
     align-items: center;
@@ -6,6 +15,7 @@
 }
 .itemLink{
     display: block;
+    width: 100%;
 }
 .leftOrnament{
     width: 48px;
@@ -17,7 +27,7 @@
     position: absolute;
     display: grid;
     place-items: center;
-    right: 0;
+    right: 20px;
     top: 50%;
     transform: translateY(-50%);
     z-index: 2;
@@ -27,12 +37,13 @@
 }
 .item{
     position: relative;
+    --background: transparent;
 }
 .itemText{
     padding: 0 15px;
     box-sizing: border-box;
     flex-grow: 1;
 }
-.listContainer{
-    
+.ListContainer{
+    background-color: transparent;
 }
