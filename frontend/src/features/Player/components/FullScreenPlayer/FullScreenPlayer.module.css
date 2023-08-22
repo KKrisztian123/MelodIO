@@ -1,0 +1,21 @@
+.playerControls{
+    position: relative;
+}
+.playerControls .startOrnament{
+    position: absolute;
+    left: 0;
+    z-index: -1;
+    top: -25px;
+}
+.playerControls .endOrnament{
+    position: absolute;
+    right: 0;
+    z-index: -1;
+    top: -25px;
+}
+.controlsContainer{
+    margin-top: 10px;
+}
+div.timeRange{
+    gap: 0;
+}

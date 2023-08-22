@@ -12,6 +12,10 @@ const BottomNavigation = ({ children }: PropsWithChildren) => {
   return isValid && <div className={styles.bottomNavigation}>{children}</div>;
 };
 
+export const BottomNavigationContainer = ({ children }: PropsWithChildren) => {
+  return <div className={styles.bottomNavigationItems}>{children}</div>;
+};
+
 export type BottomNavigationButtonProps = {
   /** Url to navigate to. */
   to: string;

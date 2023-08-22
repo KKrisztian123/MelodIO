@@ -48,8 +48,11 @@ const AlbumSearch = ({ children }: PropsWithChildren) => {
     const result = albumsResponse?.map(
       ({ author, ...rest }: StatelessAlbum) => {
         return {
-          author: author.map((authorId) =>
-            artistsResponse.find((artist: Author) => authorId === artist.id)|| {}
+          author: author.map(
+            (authorId) =>
+              artistsResponse.find(
+                (artist: Author) => authorId === artist.id
+              ) || {}
           ),
           ...rest,
         };

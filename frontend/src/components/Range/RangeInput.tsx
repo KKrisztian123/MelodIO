@@ -29,6 +29,8 @@ export type RangeProps = {
   size?: number;
   /** Changes the start-end order of the range slider. If `true` the end and start values are swapped. */
   reverse?: boolean;
+  /** Optional extra classNames for the range input. */
+  className?: string;
 };
 
 export type ControlledRangeProps = AllOrNothing<Controlled> & RangeProps;
@@ -72,6 +74,8 @@ const RangeInput = ({
   endOrnament,
   size,
   reverse = false,
+  className = "",
+  ...rest
 }: ControlledRangeProps) => {
   const [internalValue, setInternalValue] = useState(min);
   const value = externalValue !== undefined ? externalValue : internalValue;
@@ -86,7 +90,10 @@ const RangeInput = ({
   const knobRef = useRef<HTMLDivElement>(null);
   const positionRef = useRef(position / 100); // progress percentage in decimal
   const [mouseState, setMouseState] = useState(false);
-  const translate = orientation === "horizontal" ? {translateX: "-50%"} : {translateY: "-50%"};
+  const translate =
+    orientation === "horizontal"
+      ? { translateX: "-50%" }
+      : { translateY: "-50%" };
 
   const keyboardMove = (e: KeyboardEvent<HTMLDivElement>) => {
     e.preventDefault();
@@ -170,9 +177,10 @@ const RangeInput = ({
     <div
       className={
         reverse
-          ? `${styles.range} ${styles[orientation]} ${styles.reverse}`
-          : `${styles.range} ${styles[orientation]}`
+          ? `${styles.range} ${styles[orientation]} ${styles.reverse} ${className}`
+          : `${styles.range} ${styles[orientation]}  ${className}`
       }
+      {...rest}
     >
       {startOrnament && (
         <div className={styles.startOrnament}>{startOrnament}</div>
@@ -211,7 +219,7 @@ const RangeInput = ({
         <motion.div
           className={styles.rangeKnob}
           ref={knobRef}
-          animate={{ scale: mouseState ? 1.25 : 1 , ...translate}}
+          animate={{ scale: mouseState ? 1.25 : 1, ...translate }}
           style={
             orientation === "horizontal"
               ? { left: `${position}%` }

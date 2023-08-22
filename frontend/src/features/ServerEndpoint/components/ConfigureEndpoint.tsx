@@ -57,6 +57,7 @@ const ConfigureEndpoint: FC<ConfigureEndpointProps> = ({ onFinish }) => {
                     required: { value: true, message: "" },
                     value: endpoint,
                   }}
+                  description="Pl.: https://melodioszerverem.hu/"
                 />
               )}
             </FormBlock>

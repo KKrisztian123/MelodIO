@@ -6,6 +6,8 @@ type configProps = {
   isValid: boolean;
   isLoading: boolean;
 };
+/** Global base url. */
+export let baseUrl: string;
 
 const initialConfigState: configProps = {
   /** The validity of the server address. */
@@ -49,7 +51,10 @@ export const useConfigureBaseURL = (): [
   /** Configures the main endpoint of the app and saves it to storage. */
   const config = (endpoint = false as string | false) => {
     if (endpoint === false) return;
-
+    if(!endpoint.includes("http://") && !endpoint.includes("https://")){
+      endpoint = `https://${endpoint}`;
+    }
+    endpoint = endpoint.endsWith("/") ? endpoint : `${endpoint}/`
     //start loading
     dispatch({
       type: actionKinds.START,
@@ -68,6 +73,7 @@ export const useConfigureBaseURL = (): [
         //valid address and valid app server
         if (response?.valid === true) {
           storeBaseUrl(endpoint);
+          baseUrl = endpoint;
           axios.defaults.baseURL = endpoint;
         }
       })
@@ -96,7 +102,12 @@ export const useGetEndpoint = () => {
 
   useEffect(() => {
     getBaseUrl()
-      .then((res) => res && setEndpoint(res))
+      .then((res) => {
+        if (res) {
+          setEndpoint(res);
+          baseUrl = res;
+        }
+      })
       .finally(() => setLoaded(false));
   }, [setEndpoint]);
 

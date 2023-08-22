@@ -17,6 +17,8 @@
     display: flex;
     justify-content: space-between;
     flex-direction: column;
+    border-radius: 37px;
+    overflow: hidden;
 }
 .cardContent h3{
     color: #fff;
@@ -40,4 +42,8 @@
     inset: 0;
     border-radius: 37px;
     background-color: #00000022;
+}
+.cardLink{
+    position: absolute;
+    inset: 0;
 }

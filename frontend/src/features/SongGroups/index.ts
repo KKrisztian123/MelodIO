@@ -4,3 +4,4 @@ export {default as AlbumPage} from "./routes/Album/Album";
 export {default as AlbumsPage} from "./routes/Album/Index";
 export {default as LikedSongsPage} from "./routes/Playlist/LikedSongs";
 export {default as PlaylistsPage} from "./routes/Playlist/Index";
+export {default as useAlbum} from "./hooks/useAlbum";

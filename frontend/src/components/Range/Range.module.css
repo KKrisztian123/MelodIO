@@ -3,6 +3,7 @@
     align-items: center;
     justify-content: center;
     gap: 16px;
+    touch-action: none;
 }
 .rangeBarContainer{
     flex-grow: 1;

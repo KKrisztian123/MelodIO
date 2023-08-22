@@ -1,6 +1,7 @@
 import styles from "./Card.module.css";
 import type { ReactNode } from "react";
 import Image from "../Image/Image";
+import { Link } from "react-router-dom";
 
 export type CardProps = {
   /** URL of background image. */
@@ -13,12 +14,15 @@ export type CardProps = {
   topOrnament?: ReactNode;
   /** Creates an ambient light around the card based on its contents. */
   ambientLight?: boolean;
+  /** Optional link */
+  link?: string;
 };
 
 /** Card with background image */
 const Card = ({
   src,
   alt,
+  link,
   bottomOrnament,
   topOrnament,
   ambientLight,
@@ -33,13 +37,15 @@ const Card = ({
         width={"100%"}
         borderRadius={37}
         ambientLight={ambientLight}
-        style={{aspectRatio:16/10}}
+        style={{ aspectRatio: 16 / 10 }}
       />
       <div className={styles.cardOverlay}>
         <div className={styles.bottomShadow}></div>
       </div>
+
       <div className={styles.cardContent}>
         <div className={styles.topOrnament}>{topOrnament}</div>
+        {link && <Link className={styles.cardLink} to={link}/>}
         <div className={styles.bottomOrnament}>{bottomOrnament}</div>
       </div>
     </div>

@@ -1,33 +1,7 @@
-import GridImageItem from "@components/GridImageItem/GridImageItem";
-import { SmallLoader } from "@components/Loaders/Loaders";
-import { AnimatePresence, motion } from "framer-motion";
-import styles from "./PlaylistGridItem.module.css";
+import SongGroupGridItem from "../SongGroupGridItem/SongGroupGridItem";
 
 /** Displays album information in grid item */
-const PlaylistGridItem = ({ id, name, image, creators, type, active }) => {
-  return (
-    <GridImageItem
-      albumId={id}
-      albumName={name}
-      url={`/playlists/${id}`}
-      imageUrl={image}
-      albumCreators={creators}
-      albumType={type}
-      imageOrnament={
-        <AnimatePresence>
-          {active && (
-            <motion.div
-              className={styles.albumGridItem}
-              initial={{ opacity: 0, y: 5 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: 5 }}
-            >
-              <SmallLoader withBackground />
-            </motion.div>
-          )}
-        </AnimatePresence>
-      }
-    />
-  );
+const PlaylistGridItem = (props) => {
+  return <SongGroupGridItem {...props} urlPrefix={"playlists"} />;
 };
 export default PlaylistGridItem;

@@ -29,7 +29,6 @@ const useLikedSongs = () => {
           const songWithArtist = mergeArtistsToSong(song, res.artists);
           return mergeAlbumToSong(songWithArtist, res.albums);
         });
-        console.log(merged);
         merged && setLikedSongs(merged);
       }
     });

@@ -1,5 +1,5 @@
 import { IonPage } from "@ionic/react";
-import { memo, type FC } from "react";
+import { type FC, useCallback } from "react";
 import Header from "../../../../components/Layout/AppLayout/Header/Header";
 import { useParams } from "react-router";
 import PageContent from "../../../../components/Layout/Frame/PageContent/PageContent";
@@ -11,12 +11,20 @@ import { faHeart } from "@fortawesome/free-regular-svg-icons";
 import { faHeart as faHeartSolid } from "@fortawesome/free-solid-svg-icons";
 import { useLike } from "../../hooks/useLike";
 import SongGroup from "@features/SongGroups/components/SongGroup/SongGroup";
+import { usePlayer } from "@features/Player";
 
 const AlbumPage: FC = () => {
   const { albumId } = useParams<{ albumId: string }>();
   const { album, setAlbum, errorContent, isLoading } = useAlbum(albumId);
   const like = useLike("song", album, setAlbum);
-  const likeAlbum = useLike("album", album, setAlbum);
+  const likeAlbum = useLike("album", album, setAlbum, "single");
+  const { play } = usePlayer();
+  const playSong = useCallback(
+    (songId: string) => {
+      album.songs && play(albumId, album.songs, songId);
+    },
+    [play, albumId, album.songs]
+  );
   return (
     <IonPage style={{ zIndex: 1 }}>
       <Header
@@ -27,6 +35,7 @@ const AlbumPage: FC = () => {
             type="tertiary"
             size="extraLarge"
             icon={album.favorite ? faHeartSolid : faHeart}
+            isActive={album.favorite}
             label="Hozzáadás a kedvelt albumokhoz."
             onClick={() => likeAlbum(albumId)}
           />
@@ -41,15 +50,10 @@ const AlbumPage: FC = () => {
           loaderText={"Album betöltése"}
           loading={isLoading}
         >
-          <SongGroup
-            like={like}
-            songGroup={album}
-            play={() => console.log("play")}
-          />
+          <SongGroup like={like} songGroup={album} play={playSong} />
         </PageFetchDisplay>
       </PageContent>
     </IonPage>
   );
 };
 export default AlbumPage;
-

@@ -19,11 +19,6 @@ export const useFileForm = (
 
   const submit = (v: ProfileRequest) => {
     fetcher(createFormData(v))
-      // .then((res: APIResponse<Profile>) =>
-      //   res?.status === "success"
-      //     ? typeof onSuccess === "function" && onSuccess(res?.payload)
-      //     : showError(res?.message || true)
-      // )
       .then((res) =>
         responseHandler(
           res,

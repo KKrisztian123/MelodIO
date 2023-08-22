@@ -76,6 +76,9 @@ export default [
     props: {
       exact: true,
     },
+    headerProps: {
+      transparent: true,
+    },
     title: "Lejátszási Listák",
   },
   {

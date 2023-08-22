@@ -40,7 +40,6 @@ type Song = {
   fileType: string;
 };
 
-
 type MergedAlbum = Album & {
   author: Author[];
 };
@@ -79,3 +78,5 @@ type PlayListContents = {
   authorList: Author[];
   albumList: Album[];
 };
+
+type MergedAlbumWithSongList = MergedAlbum & { songs: MergedSong[] };

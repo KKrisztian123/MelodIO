@@ -27,7 +27,6 @@ import "@ionic/react/css/display.css";
 import "./theme/variables.css";
 import "./theme/global.css";
 
-
 setupIonicReact({
   mode: "ios",
 });
@@ -55,7 +54,7 @@ const App: React.FC = () => {
       </Layout>
       <ProfileManager />
       <EndpointManager />
-      <NetworkManager/>
+      <NetworkManager />
     </IonApp>
   );
 };

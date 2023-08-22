@@ -13,6 +13,7 @@ import useLikedAlbums, {
 import { useCurrentProfile } from "@features/Profile";
 import likedSongsImage from "@assets/likedSongs.svg";
 import PlaylistGridItem from "@features/SongGroups/components/PlaylistGridItem/PlaylistGridItem";
+import usePlaying from "@features/Player/hooks/usePlaying";
 
 function handleRefresh(event: CustomEvent<RefresherEventDetail>) {
   setTimeout(() => {
@@ -23,7 +24,8 @@ function handleRefresh(event: CustomEvent<RefresherEventDetail>) {
 const PlaylistsPage: FC = () => {
   const { likedAlbums, errorContent, isLoading } = useLikedAlbums();
   const profile = useCurrentProfile();
-  
+  const {albumId} = usePlaying();  
+
   return (
     <IonPage>
       <PageContent hasExternalHeader>
@@ -52,7 +54,7 @@ const PlaylistsPage: FC = () => {
                   type={"Lejátszási lista"}
                 /> 
                 {likedAlbums &&
-                  likedAlbums?.map((res, id) => (
+                  likedAlbums?.map((res) => (
                     <AlbumGridItem
                       key={res.id}
                       id={res.id}
@@ -60,7 +62,7 @@ const PlaylistsPage: FC = () => {
                       image={res.image}
                       creators={res.author?.map((author) => author.name)}
                       type={res.type}
-                      active={id === 1}
+                      active={albumId === res.id}
                     />
                   ))}
               </IonRow>

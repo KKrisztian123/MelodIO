@@ -1,4 +1,5 @@
 import {
+  mergeAlbumToSong,
   mergeArtistsToAlbums,
   mergeArtistsToSong,
   responseHandler,
@@ -25,12 +26,22 @@ const useAlbum = (id: string) => {
     responseHandler(data, showError, (res) => {
       const merged = mergeArtistsToAlbums([res.album], res.authorList);
       if (merged?.[0]) {
-        merged[0].songs = merged[0].songs?.map((song) => mergeArtistsToSong(song, res.authorList))
+        const { id, name, author, type, favorite, image } = merged[0];
+        merged[0].songs = merged[0].songs?.map((song) =>
+          mergeAlbumToSong(mergeArtistsToSong(song, res.authorList), [{
+            id,
+            name,
+            author,
+            type,
+            favorite,
+            image,
+          }])
+        );
         merged && setAlbum(merged[0]);
       }
     });
   }, [data, setAlbum, showError]);
 
-  return { album,setAlbum, errorContent, isLoading };
+  return { album, setAlbum, errorContent, isLoading };
 };
 export default useAlbum;

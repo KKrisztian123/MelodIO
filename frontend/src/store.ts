@@ -3,13 +3,15 @@ import authReducer from '@features/Auth/authSlice'
 import profileReducer from "@features/Profile/profileSlice"
 import networkReducer from "@features/Network/networkSlice"
 import appReducer from "@/appSlice"
+import playerReducer from "@features/Player/playerSlice"
 
 export const store = configureStore({
   reducer: {
     auth: authReducer,
     profile: profileReducer,
     network: networkReducer,
-    app: appReducer
+    app: appReducer,
+    player: playerReducer
   },
 })
 

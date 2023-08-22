@@ -10,8 +10,6 @@ const useGetFormAlbums = (showError) => {
   const [artistfetcher, artistLoading] = useAxios("GET", "/artists");
   const [result, setResult] = useState<any[]>([]);
 
-  //
-
   const fetch = useCallback(
     (albumIds: Album["id"][]) =>
       fetcher({}, { albumIds: albumIds })
@@ -42,5 +40,3 @@ const useGetFormAlbums = (showError) => {
   return { result, fetch, loading: loadState };
 };
 export default useGetFormAlbums;
-
-// TODO: belemegrelni a useGetFormArtists-os hookot

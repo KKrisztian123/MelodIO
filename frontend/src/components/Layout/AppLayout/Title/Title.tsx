@@ -14,7 +14,7 @@ const Title = ({
     className={styles.title}
     style={{ display: "inline-block", overflow: "hidden" }}
   >
-    <AnimatePresence mode="wait">
+    <AnimatePresence key={"headerTitle"} mode="wait">
       {title?.split("").map((char, key) => (
         <Character
           character={char === " " ? <>&nbsp;</> : char}

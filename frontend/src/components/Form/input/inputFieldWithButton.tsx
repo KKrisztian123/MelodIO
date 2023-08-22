@@ -1,6 +1,6 @@
 import "./fields.css";
 import { AnimatePresence, motion } from "framer-motion";
-import { useRef, useState, useEffect, useId } from "react";
+import { useRef, useState, useEffect, useId, useCallback } from "react";
 import { forwardRef } from "react";
 import type { HTMLProps, PropsWithChildren, ReactNode } from "react";
 import { UseFormRegisterReturn } from "react-hook-form";
@@ -46,10 +46,17 @@ const InputFieldWithButton = forwardRef<
     const [height, setHeight] = useState(15);
     const errMessage = error?.errMessage;
 
+    const measure = useCallback(
+      (span) => {
+        const calc = span?.getBoundingClientRect()?.height;
+        setHeight((current) => (calc > 0 ? calc : current));
+      },
+      [setHeight]
+    );
+
     useEffect(() => {
-      const calc = spanRef.current?.getBoundingClientRect()?.height || 30;
-      setHeight((current) => (calc > 0 ? calc : current));
-    }, [description, errMessage]);
+      spanRef.current && measure(spanRef.current);
+    }, [description, errMessage, measure]);
 
     return (
       <div className="inp-wrapper">
@@ -66,7 +73,9 @@ const InputFieldWithButton = forwardRef<
             />
             <span className="label">{label}</span>
             <span className="focus-bg"></span>
-            {rightOrnament && <span className="right-ornament">{rightOrnament}</span>}
+            {rightOrnament && (
+              <span className="right-ornament">{rightOrnament}</span>
+            )}
           </label>
         </div>
         <motion.p
@@ -74,7 +83,11 @@ const InputFieldWithButton = forwardRef<
           className="inp-desc"
         >
           <span
-            ref={spanRef}
+            ref={(ref) => {
+              if(!ref) return;
+              measure(ref);
+              spanRef.current = ref;
+            }}
             role={errMessage && "alert"}
             className={errMessage && "inp-error"}
           >

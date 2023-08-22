@@ -1,7 +1,6 @@
 import { IonPage } from "@ionic/react";
 import ProfilePage from "../../Profile/routes/Profile";
 import PasswordChangePage from "./PasswordChange";
-import EqualizerPage from "./Equalizer";
 import EndpointPage from "./Endpoint";
 import AuthenticatedRoute from "@components/Layout/Routing/AuthenticatedRoute";
 import Routes from "@components/Layout/Routing/RouteProvider";

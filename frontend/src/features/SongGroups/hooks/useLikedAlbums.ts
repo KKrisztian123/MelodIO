@@ -11,11 +11,7 @@ const useLikedAlbums = () => {
   const [likedAlbums, setLikedAlbums] = useState([]);
 
   useEffect(() => {
-    responseHandler(
-      data,
-      showError,
-      (payload) => (console.log(payload), setLikedAlbums(payload))
-    );
+    responseHandler(data, showError, (payload) => setLikedAlbums(payload));
   }, [data, setLikedAlbums, showError]);
 
   useEffect(() => {

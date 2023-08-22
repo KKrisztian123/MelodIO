@@ -38,6 +38,12 @@ export const useSessionValidation = () => {
   return isValidSession(session);
 };
 
+/** Hook for checking session initialization state. */
+export const useSessionInitialized = () => {
+  const session  = useSession();
+  return session.userId !== -1;
+}
+
 /** Initialize session from storage. */
 export const useInitSession = () => {
   const dispatch = useDispatch();

@@ -2,6 +2,7 @@ import { imageToB64, isFile } from "@/utils/utils";
 import { Profile } from "@features/Profile/types";
 import { rest } from "msw";
 import mockImage from "./mockImage";
+import { wordFilter } from "@features/Search/utils/utils";
 
 const artists = [
   {
@@ -52,7 +53,7 @@ const songs = [
     album: "ab67616100115174b3",
     type: "Dal",
     fileType: "mp3",
-    favorite: true,
+    favorite: false,
   },
   {
     id: "ab67616171806674cc8",
@@ -88,7 +89,7 @@ const songs = [
     album: "ab6761610111e5eb",
     type: "Dal",
     fileType: "mp3",
-    favorite: true,
+    favorite: false,
   },
 ] as Song[];
 
@@ -275,7 +276,6 @@ export const handlers = [
   }),
   /** Auth User; list of liked albums. */
   rest.get("/albums/like", async (req, res, ctx) => {
-    console.log(albums);
     const likedAlbums = albums.filter((album) => album.favorite);
     const albumsWithAuthor = likedAlbums.map(({ author, ...rest }) => {
       return {
@@ -353,13 +353,6 @@ export const handlers = [
       ),
       artists: authorList,
     });
-    console.log({
-      songs: likedSongs,
-      albums: albumIds.map((albumId) =>
-        albums.find((album) => album.id === albumId)
-      ),
-      artists: authorList,
-    })
     return res(ctx.delay(1000), ctx.body(body), ctx.status(200));
   }),
   /** Auth: Admin; individual song mock response */
@@ -410,6 +403,54 @@ export const handlers = [
   rest.post("/albums/:albumId/like", async (req, res, ctx) => {
     const requestBody = await req.json();
     const body = successResponse({ value: requestBody.value });
+    return res(ctx.delay(1000), ctx.body(body), ctx.status(200));
+  }),
+  /** Auth User; Search results. */
+  rest.get("/search", async (req, res, ctx) => {
+    const requestBody = req.url.searchParams.get("search");
+
+    const searchArtists = artists.filter((artist) =>
+      wordFilter(artist.name, requestBody)
+    );
+    const searchAlbums = albums.filter((album) =>
+      wordFilter(album.name, requestBody)
+    );
+    const searchSongs = songs.filter((song) =>
+      wordFilter(song.name, requestBody)
+    );
+    
+    const albumIds: string[] = [];
+    searchSongs.forEach(
+      (song) => albumIds.includes(song.album) || albumIds.push(song.album)
+    );
+
+    const authorIds: string[] = [];
+    searchSongs.forEach((song) =>
+      song.author.forEach(
+        (authorId) => authorIds.includes(authorId) || authorIds.push(authorId)
+      )
+    );
+    searchAlbums.forEach((album) =>
+    album.author.forEach(
+      (authorId) => authorIds.includes(authorId) || authorIds.push(authorId)
+    )
+  );
+    const authorList = authorIds.map((artistId) =>
+      artists.find((artist) => artist.id === artistId)
+    );
+    const albumList = albumIds.map((albumId) =>
+      albums.find((album) => album.id === albumId)
+    );
+    const results = {
+      results: {
+        artists: searchArtists,
+        albums: searchAlbums,
+        songs: searchSongs,
+      },
+      artists: authorList,
+      albums: albumList,
+    };
+    const body = successResponse(results);
     return res(ctx.delay(1000), ctx.body(body), ctx.status(200));
   }),
   /** Auth User; Returns last 10 releases */

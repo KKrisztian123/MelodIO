@@ -1,0 +1,34 @@
+.playerWidgetContainer {
+  display: flex;
+  padding: 10px;
+  padding-top: 3px;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+.playerWidgetInfo {
+  width: 100%;
+}
+.playerWidgetImage,
+.playerWidgetButton {
+  display: grid;
+  place-content: center;
+}
+.playerWidgetButton {
+  position: relative;
+  z-index: 10;
+}
+.playerWidgetWrapper {
+  overflow: hidden;
+}
+.playerWidgetFullScreen {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: 2;
+  background-color: transparent;
+  outline: unset;
+  border: unset;
+  cursor: pointer;
+}

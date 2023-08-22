@@ -1,8 +1,9 @@
 import { faHeart, faHome, faSearch } from "@fortawesome/free-solid-svg-icons";
 import BottomNavigation, {
   BottomNavigationButton,
+  BottomNavigationContainer,
 } from "./BottomNavigation/BottomNavigation";
-import { PropsWithChildren } from "react";
+import { PropsWithChildren, useEffect } from "react";
 import Header from "./Header/Header";
 import { useMainLocation } from "../../../hooks/locationHooks";
 import routes from "../../../routes";
@@ -12,6 +13,9 @@ import ProfileImage from "../../ProfileImage/ProfileImage";
 import BackButton from "../BackButton";
 import { useCurrentProfile } from "@features/Profile";
 import { motion } from "framer-motion";
+import { useDispatch } from "react-redux";
+import { setScroll } from "@/appSlice";
+import { PlayerWidget } from "@features/Player";
 
 /** Main App Layout */
 const Layout = ({ children }: PropsWithChildren) => {
@@ -20,21 +24,24 @@ const Layout = ({ children }: PropsWithChildren) => {
       <LayoutHeader />
       {children}
       <BottomNavigation>
-        <BottomNavigationButton
-          to={"/explore/"}
-          icon={faHome}
-          label={"Felfedezés"}
-        />
-        <BottomNavigationButton
-          to={"/search/"}
-          icon={faSearch}
-          label={"Keresés"}
-        />
-        <BottomNavigationButton
-          to={"/playlists/"}
-          icon={faHeart}
-          label={"Lejátszási listák"}
-        />
+        <PlayerWidget />
+        <BottomNavigationContainer>
+          <BottomNavigationButton
+            to={"/explore/"}
+            icon={faHome}
+            label={"Felfedezés"}
+          />
+          <BottomNavigationButton
+            to={"/search/"}
+            icon={faSearch}
+            label={"Keresés"}
+          />
+          <BottomNavigationButton
+            to={"/playlists/"}
+            icon={faHeart}
+            label={"Lejátszási listák"}
+          />
+        </BottomNavigationContainer>
       </BottomNavigation>
     </div>
   );
@@ -44,11 +51,15 @@ export default Layout;
 /** Main layout header */
 const LayoutHeader = () => {
   const location = useMainLocation();
+  const dispatch = useDispatch();
   const profile = useCurrentProfile();
   const route = routes.find(
     (route) => route.path.replaceAll("/", "") === location.replaceAll("/", "")
   );
-
+  useEffect(() => {
+    //resetting header scrollState on route change
+    dispatch(setScroll(false));
+  }, [route, dispatch]);
   return (
     <>
       <motion.div

@@ -4,8 +4,11 @@ import { LargeMusicalText } from "@components/MusicalText/MusicalText";
 import ListContainer from "@components/List/ListContainer";
 import { FC } from "react";
 import SongGroupItem from "../SongItem/SongItem";
+import usePlaying from "@features/Player/hooks/usePlaying";
 
 const SongGroup: FC = ({ like, play, songGroup }) => {
+  const { songId } = usePlaying();
+
   return (
     <>
       <Content center sidePadded>
@@ -30,7 +33,8 @@ const SongGroup: FC = ({ like, play, songGroup }) => {
             number={id + 1}
             favorite={song.favorite}
             like={like}
-            onClick={() => play(song)}
+            onClick={() => play(song.id)}
+            active={songId === song.id}
           />
         ))}
       </ListContainer>

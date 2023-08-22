@@ -64,23 +64,3 @@ const Header = ({
 };
 
 export default Header;
-
-{
-  /* <IconButton
-icon={faChevronLeft}
-type="tertiary"
-size="extraLarge"
-label="Vissza"
-slot="start"
-/> */
-}
-
-{
-  /* <IconButton
-icon={faChevronLeft}
-type="tertiary"
-size="extraLarge"
-label="Vissza"
-slot="end"
-/> */
-}

@@ -39,7 +39,10 @@ const Image = ({
   style,
   ...rest
 }: ImageProps) => {
-  const styleContent = { borderRadius: borderRadius, filter: `blur(${ambientLightSize}px)`};
+  const styleContent = {
+    borderRadius: borderRadius,
+    filter: `blur(${ambientLightSize}px)`,
+  };
   return (
     <div
       className={styles.imageContainer}
@@ -74,25 +77,65 @@ export type SizedImage = Omit<ImageProps, "width" | "height" | "borderRadius">;
 
 /** Extra small image. 48px  */
 export const XSImage = (props: SizedImage) => {
-  return <Image {...props} width={48} height={"auto"} borderRadius={12} ambientLightSize={8} />;
+  return (
+    <Image
+      {...props}
+      width={48}
+      height={"auto"}
+      borderRadius={12}
+      ambientLightSize={8}
+    />
+  );
 };
 
 /** Small image. 60px */
 export const SImage = (props: SizedImage) => {
-  return <Image {...props} width={60} height={"auto"} borderRadius={12} ambientLightSize={10} />;
+  return (
+    <Image
+      {...props}
+      width={60}
+      height={"auto"}
+      borderRadius={12}
+      ambientLightSize={10}
+    />
+  );
 };
 
 /** Medium image. 80px */
 export const MImage = (props: SizedImage) => {
-  return <Image {...props} width={80} height={"auto"} borderRadius={16} ambientLightSize={13}/>;
+  return (
+    <Image
+      {...props}
+      width={80}
+      height={"auto"}
+      borderRadius={16}
+      ambientLightSize={13}
+    />
+  );
 };
 
 /** Large image. 150px */
 export const LImage = (props: SizedImage) => {
-  return <Image {...props} width={150} height={"auto"} borderRadius={20} ambientLightSize={24} />;
+  return (
+    <Image
+      {...props}
+      width={150}
+      height={"auto"}
+      borderRadius={20}
+      ambientLightSize={24}
+    />
+  );
 };
 
 /** Extra large image. 250px */
 export const XLImage = (props: SizedImage) => {
-  return <Image {...props} width={250} height={"auto"}  borderRadius={33} ambientLightSize={40} />;
+  return (
+    <Image
+      {...props}
+      width={250}
+      height={"auto"}
+      borderRadius={33}
+      ambientLightSize={40}
+    />
+  );
 };

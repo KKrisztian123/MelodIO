@@ -1,9 +1,5 @@
 .mobile-header {
   z-index: 1;
-  /* background-color: rgba(var(--ion-color-light-rgb), 0.8);
-  backdrop-filter: blur(40px);
-  transform: translate3d(0,0,0); */
-  
 }
 .mobile-header ion-toolbar {
   display: flex;

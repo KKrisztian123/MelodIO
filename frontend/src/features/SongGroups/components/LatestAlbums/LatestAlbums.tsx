@@ -6,9 +6,11 @@ import TitleRow from "@components/TitleRow/TitleRow";
 import { IonGrid, IonRow } from "@ionic/react";
 import AlbumGridItem from "../AlbumGridItem/AlbumGridItem";
 import { useLatestAlbums } from "../../hooks/useLatestAlbums";
+import usePlaying from "@features/Player/hooks/usePlaying";
 
 const LatestAlbums = ({ sidePadded }: Pick<ContentProps, "sidePadded">) => {
   const { albums, errorContent, isLoading } = useLatestAlbums();
+  const { albumId } = usePlaying();
 
   return (
     <Content sidePadded={sidePadded}>
@@ -26,7 +28,7 @@ const LatestAlbums = ({ sidePadded }: Pick<ContentProps, "sidePadded">) => {
         <IonGrid>
           <IonRow>
             {albums &&
-              albums.map((res, id) => (
+              albums.map((res) => (
                 <AlbumGridItem
                   key={res.id}
                   id={res.id}
@@ -34,7 +36,7 @@ const LatestAlbums = ({ sidePadded }: Pick<ContentProps, "sidePadded">) => {
                   image={res.image}
                   creators={res.author?.map((author) => author.name)}
                   type={res.type}
-                  active={id === 1}
+                  active={res.id === albumId}
                 />
               ))}
           </IonRow>
