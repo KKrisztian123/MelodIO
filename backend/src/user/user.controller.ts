@@ -166,7 +166,7 @@ export class UserController {
                 (key) => imageTypes[key] === fileType,
               ),
             )
-          : `data:${file.mimeType};base64,${file.buffer.toString('base64')}`
+          : `data:${file.mimetype};base64,${file.buffer.toString('base64')}`
         : false,
       name: updateInfo.name,
       email: updateInfo.email,
