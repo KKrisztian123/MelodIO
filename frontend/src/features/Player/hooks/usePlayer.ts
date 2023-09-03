@@ -15,7 +15,7 @@ import { Player } from "../types";
 import { useCallback, useEffect } from "react";
 import { usePlayHistory } from "@features/PlayHistory";
 
-export let PlayerState: typeof Howl;
+export let PlayerState: Howl;
 let playId: number;
 let playedSongs: string[] = [];
 
