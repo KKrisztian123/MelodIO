@@ -8,7 +8,7 @@
       "@components/*": ["./src/components/*"],
       "@hooks/*": ["./src/hooks/*"],
       "@assets/*": ["./src/assets/*"],
-      "@/*": ["./src/*"],
+      "@/*": ["./src/*"]
     },
     "esModuleInterop": false,
     "allowSyntheticDefaultImports": true,
@@ -21,7 +21,7 @@
     "noEmit": false,
     "noEmitOnError": false,
     "jsx": "react-jsx",
-    "types": ["vite/client","howler","jest"]
+    // "types": ["vite/client", "howler", "jest"]
   },
   "include": ["src"],
   "references": [{ "path": "./tsconfig.node.json" }]
