@@ -31,7 +31,7 @@ export class ListService {
           .map((collaborator) =>
             artists.find((artist) => artist.id === collaborator.artistToken),
           ),
-        image: `${protocol}://${host}/uploads/images/album/${album.imageURL}.${album.imageType}`,
+        image: `${protocol}://${host}/api/uploads/images/album/${album.imageURL}.${album.imageType}`,
       };
     });
   }
@@ -71,7 +71,7 @@ export class ListService {
       author: collaborators
         .filter((collaborator) => collaborator.albumId === album.id)
         .map((collaborator) => collaborator.artistToken),
-      image: `${protocol}://${host}/uploads/images/album/${album.imageURL}.${album.imageType}`,
+      image: `${protocol}://${host}/api/uploads/images/album/${album.imageURL}.${album.imageType}`,
       favorite: likedAlbum.length !== 0 ? true : false,
     };
 

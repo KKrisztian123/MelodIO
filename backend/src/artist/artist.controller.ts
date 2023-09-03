@@ -75,9 +75,9 @@ export class ArtistController {
       : successResponse({
           id: artist.token,
           name: artist.name,
-          image: `${req.protocol}://${req.get('host')}/uploads/images/artist/${
-            artist.imageURL
-          }.${artist.imageType}`,
+          image: `${req.protocol}://${req.get(
+            'host',
+          )}/api/uploads/images/artist/${artist.imageURL}.${artist.imageType}`,
         });
   }
 

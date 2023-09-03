@@ -96,7 +96,7 @@ export class SongService {
           id: album.token,
           name: album.name,
           type: album.albumType,
-          image: `${protocol}://${host}/uploads/images/album/${album.imageURL}.${album.imageType}`,
+          image: `${protocol}://${host}/api/uploads/images/album/${album.imageURL}.${album.imageType}`,
         };
       }),
       artists: artists,

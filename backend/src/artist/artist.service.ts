@@ -30,7 +30,7 @@ export class ArtistService {
       return {
         id: artist.token,
         name: artist.name,
-        image: `${protocol}://${host}/uploads/images/artist/${artist.imageURL}.${artist.imageType}`,
+        image: `${protocol}://${host}/api/uploads/images/artist/${artist.imageURL}.${artist.imageType}`,
       };
     });
   }

@@ -51,7 +51,7 @@ export class SearchService {
         author: albumCollaborators
           .filter((collaborator) => collaborator.albumId === album.id)
           .map((collaborator) => collaborator.artistToken),
-        image: `${protocol}://${host}/uploads/images/album/${album.imageURL}.${album.imageType}`,
+        image: `${protocol}://${host}/api/uploads/images/album/${album.imageURL}.${album.imageType}`,
       };
     });
 
@@ -104,7 +104,7 @@ export class SearchService {
         author: albumCollaborators
           .filter((collaborator) => collaborator.albumId === album.id)
           .map((collaborator) => collaborator.artistToken),
-        image: `${protocol}://${host}/uploads/images/album/${album.imageURL}.${album.imageType}`,
+        image: `${protocol}://${host}/api/uploads/images/album/${album.imageURL}.${album.imageType}`,
       };
     });
     const albumList = albumIds.map((albumId) =>

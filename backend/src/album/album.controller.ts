@@ -97,9 +97,9 @@ export class AlbumController {
           releaseDate: album.releaseDate,
           author: album.author,
           type: album.albumType,
-          image: `${req.protocol}://${req.get('host')}/uploads/images/album/${
-            album.imageURL
-          }.${album.imageType}`,
+          image: `${req.protocol}://${req.get(
+            'host',
+          )}/api/uploads/images/album/${album.imageURL}.${album.imageType}`,
         });
   }
 

@@ -70,7 +70,7 @@ export class AlbumService {
         name: album.name,
         releaseDate: album.releaseDate,
         type: album.albumType,
-        image: `${protocol}://${host}/uploads/images/album/${album.imageURL}.${album.imageType}`,
+        image: `${protocol}://${host}/api/uploads/images/album/${album.imageURL}.${album.imageType}`,
         author: collaborators
           .filter((collaborator) => collaborator.albumId === album.id)
           .map((collaborator) =>
@@ -117,7 +117,7 @@ export class AlbumService {
         author: collaborators
           .filter((collaborator) => collaborator.albumId === album.id)
           .map((collaborator) => collaborator.artistToken),
-        image: `${protocol}://${host}/uploads/images/album/${album.imageURL}.${album.imageType}`,
+        image: `${protocol}://${host}/api/uploads/images/album/${album.imageURL}.${album.imageType}`,
       };
     });
   }
