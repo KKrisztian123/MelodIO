@@ -1,4 +1,11 @@
-import { IonGrid, IonPage, IonRefresher, IonRefresherContent, IonRow, RefresherEventDetail } from "@ionic/react";
+import {
+  IonGrid,
+  IonPage,
+  IonRefresher,
+  IonRefresherContent,
+  IonRow,
+  RefresherEventDetail,
+} from "@ionic/react";
 import PageContent from "@components/Layout/Frame/PageContent/PageContent";
 import useAlbums, { refetchAlbums } from "@features/SongGroups/hooks/useAlbums";
 import Content from "@components/Layout/Frame/ContentContainer/Content";
@@ -9,6 +16,7 @@ import AlbumGridItem from "@features/SongGroups/components/AlbumGridItem/AlbumGr
 import usePlaying from "@features/Player/hooks/usePlaying";
 import CenteredContainer from "@components/Layout/Frame/CenteredContainer/CenteredContainer";
 import { SmallLoader } from "@components/Loaders/Loaders";
+import PageFetchDisplay from "@components/PageFetchDisplay/PageFetchDisplay";
 const MemoedAlbum = memo(AlbumGridItem);
 
 function handleRefresh(event: CustomEvent<RefresherEventDetail>) {
@@ -17,11 +25,10 @@ function handleRefresh(event: CustomEvent<RefresherEventDetail>) {
   }, 400);
 }
 
-
 const AlbumsPage: React.FC = () => {
-  const { albums } = useAlbums();
+  const { albums, isLoading, errorContent } = useAlbums();
   const { albumId } = usePlaying();
-  console.log(albums);
+
   return (
     <IonPage>
       <PageContent hasExternalHeader>
@@ -32,33 +39,40 @@ const AlbumsPage: React.FC = () => {
             </CenteredContainer>
           </IonRefresherContent>
         </IonRefresher>
-        {albums &&
-          albums?.map((artist) => (
-            <Content key={artist.id}>
-              <Card
-                src={artist.image}
-                alt={artist.name}
-                ambientLight
-                bottomOrnament={<H3>{artist.name}</H3>}
-              />
-              <IonGrid style={{ marginTop: 20 }}>
-                <IonRow>
-                  {artist.albums &&
-                    artist?.albums?.map((album) => (
-                      <MemoedAlbum
-                        key={album.id}
-                        id={album.id}
-                        name={album.name}
-                        image={album.image}
-                        creators={album.author?.map((author) => author.name)}
-                        type={album.type}
-                        active={album.id === albumId}
-                      />
-                    ))}
-                </IonRow>
-              </IonGrid>
-            </Content>
-          ))}
+        <PageFetchDisplay
+          error={!isLoading && errorContent}
+          loading={isLoading}
+          errorText={errorContent}
+          loaderText="Albumok betöltése"
+        >
+          {albums &&
+            albums?.map((artist) => (
+              <Content key={artist.id} id={artist.id}>
+                <Card
+                  src={artist.image}
+                  alt={artist.name}
+                  ambientLight
+                  bottomOrnament={<H3>{artist.name}</H3>}
+                />
+                <IonGrid style={{ marginTop: 20 }}>
+                  <IonRow>
+                    {artist.albums &&
+                      artist?.albums?.map((album) => (
+                        <MemoedAlbum
+                          key={album.id}
+                          id={album.id}
+                          name={album.name}
+                          image={album.image}
+                          creators={album.author?.map((author) => author.name)}
+                          type={album.type}
+                          active={album.id === albumId}
+                        />
+                      ))}
+                  </IonRow>
+                </IonGrid>
+              </Content>
+            ))}
+        </PageFetchDisplay>
       </PageContent>
     </IonPage>
   );

@@ -42,12 +42,12 @@ const InputFieldWithButton = forwardRef<
     ref
   ) => {
     const id = useId();
-    const spanRef = useRef<HTMLSpanElement>(null);
+    const spanRef = useRef<HTMLSpanElement>();
     const [height, setHeight] = useState(15);
     const errMessage = error?.errMessage;
 
     const measure = useCallback(
-      (span) => {
+      (span: HTMLSpanElement) => {
         const calc = span?.getBoundingClientRect()?.height;
         setHeight((current) => (calc > 0 ? calc : current));
       },
@@ -84,7 +84,7 @@ const InputFieldWithButton = forwardRef<
         >
           <span
             ref={(ref) => {
-              if(!ref) return;
+              if (!ref) return;
               measure(ref);
               spanRef.current = ref;
             }}

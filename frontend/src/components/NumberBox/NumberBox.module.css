@@ -3,7 +3,7 @@
     height: 48px;
     display: grid;
     place-items: center;
-    font-family: "Raleway", Arial, Helvetica, sans-serif;
+    font-family: var(--font-secondary);
     font-size: 2rem;
     font-weight: bold;
 }

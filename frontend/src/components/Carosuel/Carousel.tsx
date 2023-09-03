@@ -22,9 +22,7 @@ const Carousel = ({ children }: PropsWithChildren) => {
       centeredSlides: true,
     });
     swiperEl.init();
-    const changeSlideIndex = () => (
-      setActiveSlide(swiperEl.activeIndex), console.log("change")
-    );
+    const changeSlideIndex = () => setActiveSlide(swiperEl.activeIndex);
     setTimeout(() => {
       swiperEl.on("slideChange", changeSlideIndex);
     }, 200);

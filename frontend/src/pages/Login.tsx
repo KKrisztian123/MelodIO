@@ -14,22 +14,25 @@ import { FullScreenLoader } from "@components/Loaders/Loaders";
 import { ErrorText } from "@components/Text/ErrorText";
 import { Redirect } from "react-router";
 import Logo from "@components/Logo/Logo";
+import { Login } from "@features/Auth/types";
 /** Page for configuring app endpoint on first startup. */
 const LoginPage: FC = () => {
   const { login, loading, errorContent, errorRef } = useLogin();
   const isValidSession = useSessionValidation();
 
-  return isValidSession ? <Redirect to="/explore"/> :(
+  return isValidSession ? (
+    <Redirect to="/explore" />
+  ) : (
     <IonPage>
       <PageContent hasExternalHeader>
         <Content>
-        <Logo/>
+          <Logo />
         </Content>
         <H1 style={{ fontSize: "1.5rem" }} centered>
           Bejelentkezés
         </H1>
         <Content>
-          <Form onSubmit={(e) => login(e)}>
+          <Form onSubmit={(e) => login(e as Login)}>
             <FormFlex>
               <FormBlock>
                 <EmailField

@@ -4,7 +4,7 @@ export const changeLikeState = (
   values,
   newValue,
   id,
-  count: "single" | "multiple"
+  count?: "single" | "multiple"
 ) => {
   if (count === "single") {
     return { ...values, favorite: newValue };

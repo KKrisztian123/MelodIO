@@ -1,0 +1,18 @@
+version: "3"
+services:
+  nginx:
+    volumes:
+      - ./nginx.prod.conf:/etc/nginx/nginx.conf
+      - ./frontend:/app/frontend
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.prod
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.prod
+    volumes:
+      - type: bind
+        source: ./frontend
+        target: /app/frontend

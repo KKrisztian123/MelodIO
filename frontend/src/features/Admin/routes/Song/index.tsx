@@ -7,7 +7,7 @@ import Header from "@components/Layout/AppLayout/Header/Header";
 import NewSongPage from "./newSong";
 import EditSongPage from "./editSong";
 import SongSearch from "@features/Admin/components/SongSearch/SongSearch";
-import SongSearchContent from "@features/Admin/components/SongSearch/AlbumSearchContent";
+import SongSearchContent from "@features/Admin/components/SongSearch/SongSearchContent";
 
 const SongsPage: React.FC = () => {
   return (

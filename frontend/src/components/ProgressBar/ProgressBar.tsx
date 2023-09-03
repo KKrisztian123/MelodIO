@@ -1,6 +1,5 @@
 import styles from "./ProgressBar.module.css";
 import { motion } from "framer-motion";
-//lehet timed vagy non timed, mert ha fix az idő lehet smooth mozgást adni a barnak pl zenénél.
 
 export type ProgressBarProps = {
   /** Size of the progress bar. */

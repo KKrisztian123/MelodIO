@@ -63,7 +63,7 @@ export const getImageFromList = (
     : false;
 };
 /** Checks if the provided value is an instace of file */
-export const isFile = (file: FormFileOptional) => {
+export const isFile = (file: FormFileOptional): file is File => {
   return typeof file !== "string" && file !== false && file instanceof File;
 };
 
@@ -121,9 +121,12 @@ export const isStringifiedArrayNotMaxSize = (value: string, max = 1) => {
 };
 
 /** Merges an array of artists into a list of albums. */
-export const mergeArtistsToAlbums = (albums: Album[], artists: Author[]) => {
+export const mergeArtistsToAlbums = (
+  albums: Album[] | AlbumWithSongList[],
+  artists: Author[]
+) => {
   if (!albums || !artists) return;
-  return albums.map(({ author, ...rest }) => {
+  return albums.map(({ author, ...rest }: Album | AlbumWithSongList) => {
     return {
       author: author.map((artistId) =>
         artists.find((artist) => artist.id === artistId)
@@ -134,21 +137,25 @@ export const mergeArtistsToAlbums = (albums: Album[], artists: Author[]) => {
 };
 
 /** Merges an array of artists into a song. */
-export const mergeArtistsToSong = (song: Song[], artists: Author[]) => {
+export const mergeArtistsToSong = (song: Song, artists: Author[]) => {
   if (!song || !artists) return;
   return {
     ...song,
     author: song.author.map(
-      (artistId) => artists.find((artist) => artist.id === artistId) || {}
+      (artistId) =>
+        artists.find((artist) => artist.id === artistId) || ({} as Author)
     ),
   };
 };
 
 /** Merges album information into song. */
-export const mergeAlbumToSong = (song: Song, albums: Album[]) => {
+export const mergeAlbumToSong = (
+  song: Song | (Song & { author: Author[] }),
+  albums: MergedAlbum[] | Album[]
+) => {
   if (!song || !albums) return;
   return {
     ...song,
-    album: albums.find(album => album.id === song.album) || {}
-  }
+    album: albums.find((album) => album.id === song.album) || ({} as Album),
+  };
 };

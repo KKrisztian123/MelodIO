@@ -1,0 +1,22 @@
+version: "3"
+services:
+  nginx:
+    volumes:
+      - ./nginx.dev.conf:/etc/nginx/nginx.conf
+  backend:
+    build: 
+      context: ./backend
+      dockerfile: Dockerfile.dev
+    volumes:
+      - type: bind
+        source: ./backend
+        target: /app/backend
+  frontend:
+    stdin_open: true
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.dev
+    volumes:
+      - type: bind
+        source: ./frontend
+        target: /app/frontend

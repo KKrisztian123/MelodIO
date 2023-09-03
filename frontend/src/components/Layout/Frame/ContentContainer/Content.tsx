@@ -6,6 +6,8 @@ export type ContentProps = {
   center?: boolean;
   /** When `true` it adds padding to the sides of the container. This props counteract the PageContent component's `fullWidth` property. */
   sidePadded?: boolean;
+  /** Optional content id. */
+  id?: string;
 };
 
 /** A container for content groups. */
@@ -13,9 +15,11 @@ const Content = ({
   children,
   center = false,
   sidePadded = false,
+  id,
 }: PropsWithChildren<ContentProps>) => {
   return (
     <div
+      id={id}
       className={[
         styles.content,
         center ? styles.center : undefined,

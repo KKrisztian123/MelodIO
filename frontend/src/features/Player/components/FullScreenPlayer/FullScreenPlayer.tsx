@@ -1,7 +1,5 @@
-import { RootState } from "@/store";
 import { XLImage } from "@components/Image/Image";
 import Content from "@components/Layout/Frame/ContentContainer/Content";
-import { useSelector } from "react-redux";
 import styles from "./FullScreenPlayer.module.css";
 import ButtonContainer from "@components/ButtonContainer/ButtonContainer";
 import { IconButton } from "@components/Button/Button";
@@ -51,7 +49,7 @@ const FullScreenPlayer = ({ changeOpen }) => {
 
         <LargeMusicalText
           name={playerState.song.name}
-          creators={playerState.song?.author?.map((author) => author.name)}
+          creators={playerState.song?.author?.map((author: Author) => author.name)}
         />
         <div className={styles.playerControls}>
           <RangeInput

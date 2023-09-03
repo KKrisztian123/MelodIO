@@ -17,6 +17,7 @@ import { SelectedAlbumsList } from "@features/Admin/components/Selection/Selecte
 import useGetFormArtists from "@features/Admin/hooks/useGetFormArtists";
 import useGetFormAlbums from "@features/Admin/hooks/useGetFormAlbums";
 import { responseHandler } from "@/utils/utils";
+import useToggle from "@hooks/useToggle";
 
 const EditSongPage: FC = () => {
   const { songId } = useParams<{ songId: string }>();
@@ -33,6 +34,7 @@ const EditSongPage: FC = () => {
     result: albumResult,
     loading: albumListLoading,
   } = useGetFormAlbums(showError);
+  const [contentLoading, setContentLoading] = useToggle(true);
   const { setPreview, preview, ...fileFormProps } = useFileForm(
     "POST",
     `/songs/${songId}`,
@@ -58,6 +60,7 @@ const EditSongPage: FC = () => {
   );
 
   useEffect(() => {
+    setContentLoading(true);
     fetcher({})
       .then((res: APIResponse<Song>) =>
         responseHandler(
@@ -69,12 +72,20 @@ const EditSongPage: FC = () => {
               name: payload.name,
             }),
             artistFetchList(payload.author),
-            albumFetchList([payload.album])
+            albumFetchList([payload.album]),
+            setContentLoading(false)
           )
         )
       )
       .catch(() => showError(true));
-  }, [fetcher, artistFetchList, albumFetchList, showError, setPreview]);
+  }, [
+    fetcher,
+    artistFetchList,
+    albumFetchList,
+    showError,
+    setPreview,
+    setContentLoading,
+  ]);
 
   return (
     <IonPage>
@@ -82,9 +93,15 @@ const EditSongPage: FC = () => {
       <PageContent>
         <PageFetchDisplay
           error={
-            !loading && !artistListLoading && !albumListLoading && errorContent
+            !contentLoading &&
+            !loading &&
+            !artistListLoading &&
+            !albumListLoading &&
+            errorContent
           }
-          loading={loading || artistListLoading || albumListLoading}
+          loading={
+            loading || artistListLoading || albumListLoading || contentLoading
+          }
           errorText={errorContent}
           loaderText={"Dal betöltése"}
         >

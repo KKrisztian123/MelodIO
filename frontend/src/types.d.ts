@@ -9,7 +9,7 @@ type FormFile = string | File;
 type FormFileOptional = FormFile | false;
 
 /** Image list on image upload. */
-type ImageList = Image[];
+type ImageList = FormFile[];
 
 /** Image list on optional image upload. */
 type ImageListOptional = FormFileOptional[];
@@ -21,7 +21,7 @@ type SearchResult = Album | Song | Playlist;
 type Album = {
   id: string;
   name: string;
-  author: Author[id][];
+  author: Author["id"][];
   type: "Album" | "Kislemez";
   favorite: boolean;
   image: string;
@@ -33,16 +33,22 @@ type StatelessAlbum = Omit<Album, "favorite">;
 type Song = {
   id: string;
   name: string;
-  author: Author[id][];
+  author: Author["id"][];
   album: string;
   type: "Dal";
   favorite: boolean;
   fileType: string;
 };
+type SongList = {
+  songs: Song[];
+};
+
+type AlbumWithSongList = Album & SongList;
 
 type MergedAlbum = Album & {
   author: Author[];
 };
+type MergedStatelessAlbum = Omit<MergedAlbum, "favorite">;
 
 type MergedSong = Song & {
   author: Author[];
@@ -52,10 +58,12 @@ type MergedSong = Song & {
 /** Song type without user state */
 type StatelessSong = Omit<Song, "favorite">;
 
+type MergedStatelessSong = Omit<MergedSong, "favorite">;
+
 type Playlist = {
   id: string;
   name: string;
-  author: Author[id][];
+  author: Author["id"][];
 };
 
 type Author = {

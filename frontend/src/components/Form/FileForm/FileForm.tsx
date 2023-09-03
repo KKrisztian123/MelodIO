@@ -27,7 +27,7 @@ export type FileFormProps = ReturnType<typeof useFileForm> &
     fieldId?: string;
     fileFieldName?: string;
     /** Pads the sides of input fields. */
-    sidePadded?:boolean;
+    sidePadded?: boolean;
   };
 
 /** Form component with file input */
@@ -65,7 +65,7 @@ const FileForm = ({
                 message: "",
               },
               validate: {
-                required: (v) =>
+                required: (v: ImageListOptional) =>
                   (requiredFile ? checkFile(v) : true) ||
                   `A ${fileFieldName.toLowerCase()} feltöltése kötelező`,
               },
@@ -89,10 +89,7 @@ const FileForm = ({
           <ErrorText ref={errorRef}>{errorContent}</ErrorText>
         </Content>
       </Form>
-      <FullScreenLoader
-        loading={isLoading}
-        text={loaderText}
-      />
+      <FullScreenLoader loading={isLoading} text={loaderText} />
     </>
   );
 };

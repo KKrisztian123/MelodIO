@@ -51,10 +51,15 @@ export const useConfigureBaseURL = (): [
   /** Configures the main endpoint of the app and saves it to storage. */
   const config = (endpoint = false as string | false) => {
     if (endpoint === false) return;
-    if(!endpoint.includes("http://") && !endpoint.includes("https://")){
+
+    if (!endpoint.includes("http://") && !endpoint.includes("https://")) {
       endpoint = `https://${endpoint}`;
     }
-    endpoint = endpoint.endsWith("/") ? endpoint : `${endpoint}/`
+    endpoint = endpoint.endsWith("/")
+      ? endpoint.substring(0, endpoint.length - 1)
+      : endpoint;
+    endpoint = `${endpoint}/api`
+
     //start loading
     dispatch({
       type: actionKinds.START,
@@ -72,9 +77,11 @@ export const useConfigureBaseURL = (): [
         const response = res.data.payload;
         //valid address and valid app server
         if (response?.valid === true) {
-          storeBaseUrl(endpoint);
-          baseUrl = endpoint;
-          axios.defaults.baseURL = endpoint;
+          storeBaseUrl(endpoint as string);
+          baseUrl = endpoint as string;
+          axios.defaults.baseURL = endpoint as string;
+        } else {
+          throw new Error();
         }
       })
       .catch(() => {

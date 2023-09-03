@@ -5,6 +5,7 @@ import HistoryCard from "../HistoryCard/HistoryCard";
 
 const HistoryList = () => {
   const { playHistory } = usePlayHistory();
+  if(playHistory.length === 0) return null; 
   return (
     <Content>
       <Carousel>

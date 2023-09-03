@@ -8,7 +8,7 @@ import { PropsWithChildren, useEffect, useState } from "react";
 const filterFunction = (value: MergedAlbum, condition: string) =>
   wordFilter(value.name, condition) ||
   wordFilter(
-    createArtistList(value.author.map((author) => author.name)),
+    createArtistList(value.author.map((author: Author) => author.name)),
     condition
   );
 

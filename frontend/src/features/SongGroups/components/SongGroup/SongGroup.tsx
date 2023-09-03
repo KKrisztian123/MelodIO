@@ -6,7 +6,17 @@ import { FC } from "react";
 import SongGroupItem from "../SongItem/SongItem";
 import usePlaying from "@features/Player/hooks/usePlaying";
 
-const SongGroup: FC = ({ like, play, songGroup }) => {
+export type SongGroupProps = {
+  /** Callback function for liking song. */
+  like: (id: string) => void;
+  /** Callback function for playing song */
+  play: (songId: string) => void;
+  /** Song Group Content */
+  songGroup: MergedAlbumWithSongList;
+};
+
+/** Displays a list of grouped songs along with the groups name, author and image. */
+const SongGroup: FC<SongGroupProps> = ({ like, play, songGroup }) => {
   const { songId } = usePlaying();
 
   return (
@@ -20,16 +30,16 @@ const SongGroup: FC = ({ like, play, songGroup }) => {
         />
         <LargeMusicalText
           name={songGroup.name}
-          creators={songGroup.author?.map((author) => author.name)}
+          creators={songGroup.author?.map((author: Author) => author.name)}
         />
       </Content>
       <ListContainer>
-        {songGroup.songs?.map((song: Song, id) => (
+        {songGroup.songs?.map((song: MergedSong, id) => (
           <SongGroupItem
             key={song.id}
             id={song.id}
             title={song.name}
-            creators={song.author?.map((author) => author.name)}
+            creators={song.author?.map((author: Author) => author.name)}
             number={id + 1}
             favorite={song.favorite}
             like={like}

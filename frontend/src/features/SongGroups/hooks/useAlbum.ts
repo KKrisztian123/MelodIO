@@ -12,7 +12,9 @@ import { useEffect, useState } from "react";
 const useAlbum = (id: string) => {
   const { errorContent, showError } = useError();
   const [data, error, isLoading] = useFetch("GET", `/list/album/${id}`);
-  const [album, setAlbum] = useState({});
+  const [album, setAlbum] = useState<MergedAlbumWithSongList>(
+    {} as MergedAlbumWithSongList
+  );
 
   useEffect(() => {
     if (error && !isLoading) {
@@ -24,20 +26,39 @@ const useAlbum = (id: string) => {
 
   useEffect(() => {
     responseHandler(data, showError, (res) => {
-      const merged = mergeArtistsToAlbums([res.album], res.authorList);
-      if (merged?.[0]) {
+      const merged = mergeArtistsToAlbums(
+        [res.album as AlbumWithSongList],
+        res.authorList
+      ) as unknown as MergedAlbumWithSongList;
+
+      if (merged?.[0] && "songs" in merged[0]) {
         const { id, name, author, type, favorite, image } = merged[0];
-        merged[0].songs = merged[0].songs?.map((song) =>
-          mergeAlbumToSong(mergeArtistsToSong(song, res.authorList), [{
-            id,
-            name,
-            author,
-            type,
-            favorite,
-            image,
-          }])
-        );
-        merged && setAlbum(merged[0]);
+
+        setAlbum({
+          id,
+          name,
+          author,
+          type,
+          favorite,
+          image,
+          songs: merged[0].songs?.map((song: Song) =>
+            mergeAlbumToSong(
+              mergeArtistsToSong(song, res.authorList) as Song & {
+                author: Author[];
+              },
+              [
+                {
+                  id,
+                  name,
+                  author,
+                  type,
+                  favorite,
+                  image,
+                },
+              ]
+            )
+          ),
+        });
       }
     });
   }, [data, setAlbum, showError]);

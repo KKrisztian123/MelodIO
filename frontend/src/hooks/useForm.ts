@@ -89,7 +89,7 @@ export default useFormWrapper;
 export type SelectionInfo = { id: string; values: any };
 
 export const FormSelectionContext = createContext<
-  ReturnType<typeof useFormSelection>
+  Partial<ReturnType<typeof useFormSelection>>
 >({} as ReturnType<typeof useFormSelection>);
 
 export const useFormSelection = (

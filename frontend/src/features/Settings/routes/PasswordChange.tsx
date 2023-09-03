@@ -14,11 +14,12 @@ import { ErrorText } from "@components/Text/ErrorText";
 import { FullScreenLoader } from "@components/Loaders/Loaders";
 import { useHistory } from "react-router";
 import { isMatching } from "@/utils/utils";
+import { PasswordChange } from "../types/Index";
 
 const PasswordChangePage: FC = () => {
   const { changePassword, loading, errorRef, errorContent } =
     usePasswordChange();
-  const [values, setValues] = useState({});
+  const [values, setValues] = useState({} as PasswordChange);
   const history = useHistory();
   return (
     <IonPage>
@@ -29,7 +30,9 @@ const PasswordChangePage: FC = () => {
         <Content>
           <Form
             onSubmit={(v) =>
-              changePassword(v).then((status) => status && history.goBack())
+              changePassword(v as PasswordChange).then(
+                (status) => status && history.goBack()
+              )
             }
             onChange={setValues}
           >

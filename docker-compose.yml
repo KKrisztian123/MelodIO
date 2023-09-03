@@ -1,36 +1,45 @@
+version: '3'
 services:
   database:
-      container_name: MelodIO-mysql
-      image: mysql:8.0
-      environment:
-          MYSQL_ROOT_PASSWORD: root
-          MYSQL_DATABASE: MelodIO
-      volumes:
-        - ./database:/docker-entrypoint-initdb.d
-      ports:
-          - "3306:3306"
+    container_name: MelodIO-mysql
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: MelodIO
+    volumes:
+      - ./database:/docker-entrypoint-initdb.d
+    ports:
+      - "3306:3306"
+    networks:
+      - melodio
+  nginx:
+    container_name: MelodIO-nginx
+    image: nginx:latest
+    ports:
+      - "80:80"
+      - "443:443"
+    depends_on:
+      - frontend
+      - backend
+    networks:
+      - melodio
   backend:
     container_name: MelodIO-backend
-    build: ./backend
     depends_on:
       - database
-    volumes:
-      - type: bind
-        source: ./backend
-        target: /app/backend
     ports:
-    - "3000:3000"
+      - "3000:3000"
+    networks:
+      - melodio
   frontend:
     container_name: MelodIO-frontend
-    stdin_open: true
-    build: ./frontend
-    # environment:
-    #  - CHOKIDAR_USEPOLLING=true
-    volumes:
-      - type: bind
-        source: ./frontend
-        target: /app/frontend
     depends_on:
       - backend
     ports:
-    - "5173:5173"
+      - "5173:5173"
+    networks:
+      - melodio
+
+networks:
+  melodio:
+    driver: bridge

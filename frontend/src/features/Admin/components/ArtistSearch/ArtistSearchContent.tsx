@@ -6,10 +6,11 @@ import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { MemoArtistFormItem, MemoArtistItem } from "../Items/ArtistItem";
 
 const ArtistSearchContent = () => {
-  const { result } = useSearchContext();
+  const { result, error, isLoading } = useSearchContext();
+
   return (
     <ListContainer>
-      {result && (
+      {!error.errorContent && !isLoading && (
         <MemoedListItem
           link="/settings/artists/new"
           title="Hozzáadás"
@@ -24,7 +25,9 @@ const ArtistSearchContent = () => {
         />
       )}
       {result &&
-        result.map((artist) => <MemoArtistItem {...artist} key={artist.id} />)}
+        result.map((artist: Author) => (
+          <MemoArtistItem {...artist} key={artist.id} />
+        ))}
     </ListContainer>
   );
 };
@@ -33,13 +36,13 @@ export default ArtistSearchContent;
 export const ArtistSearchFormSelectContent = ({
   onClick,
 }: {
-  onClick: (id:string,author: Author) => void;
+  onClick: (id: string, author: Author) => void;
 }) => {
   const { result } = useSearchContext();
   return (
     <ListContainer>
       {result &&
-        result.map((artist) => (
+        result.map((artist: Author) => (
           <MemoArtistFormItem onClick={onClick} {...artist} key={artist.id} />
         ))}
     </ListContainer>

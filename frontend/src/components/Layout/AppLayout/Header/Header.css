@@ -37,7 +37,7 @@
   margin-right: 20px;
 }
 .mobile-header-title{
-  font-family: "Raleway", Arial, Helvetica, sans-serif;
+  font-family: var(--font-secondary);
   font-weight: bold;
   font-size: 1.25rem;
 

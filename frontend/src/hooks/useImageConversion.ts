@@ -8,7 +8,7 @@ export const useImageConversion = (imageState: string | false | File) => {
   useEffect(() => {
     const convertImage = async () => {
       if (typeof imageState === "string" || !imageState) {
-        setState(imageState);
+        setState(imageState as string | false);
         return;
       }
       setState(await imageToB64(imageState));

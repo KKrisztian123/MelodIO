@@ -24,7 +24,7 @@ const PageFetchDisplay = ({
   children,
 }: PropsWithChildren<PageFetchDisplay>) => (
   <>
-    <ErrorSplash text={errorText} visible={error} />
+    <ErrorSplash text={errorText || ""} visible={error} />
     <motion.div
       initial={{ opacity: 0, display: "none" }}
       animate={

@@ -5,10 +5,14 @@
 import '@testing-library/jest-dom/extend-expect';
 
 // Mock matchmedia
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+//@ts-ignore
 window.matchMedia = window.matchMedia || function() {
   return {
       matches: false,
+      // eslint-disable-next-line @typescript-eslint/no-empty-function
       addListener: function() {},
+      // eslint-disable-next-line @typescript-eslint/no-empty-function
       removeListener: function() {}
   };
 };

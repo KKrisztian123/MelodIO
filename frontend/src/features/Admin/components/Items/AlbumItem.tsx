@@ -11,12 +11,12 @@ export const AlbumItem = ({
   type,
   author,
   image,
-}: StatelessAlbum) => {
+}: MergedStatelessAlbum) => {
   return (
     <MusicalListItem
       name={name}
       type={type}
-      creators={author.map((author) => author.name)}
+      creators={author.map((author: Author) => author.name)}
       link={`/settings/albums/${id}`}
       leftOrnament={
         <XSImage
@@ -40,14 +40,14 @@ export const AlbumFormItem = ({
   image,
   onClick,
   ...rest
-}: StatelessAlbum & {
-  onClick: (id: string, album: StatelessAlbum) => void;
+}: MergedStatelessAlbum & {
+  onClick: (id: string, album: MergedStatelessAlbum) => void;
 }) => {
   return (
     <MusicalListItem
       name={name}
       type={type}
-      creators={author.map((author) => author.name)}
+      creators={author.map((author: Author) => author.name)}
       rightOrnament={
         <IconButton
           icon={faPlus}

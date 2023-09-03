@@ -68,9 +68,9 @@ BottomAlbumCardBox.args = {
       content={
         <div style={{ paddingLeft: 21 }}>
           <AlbumText
-            albumName="Szörnyeteg"
-            albumType="Album"
-            albumCreators={["Dzsúdló"]}
+            name="Szörnyeteg"
+            type="Album"
+            creators={["Dzsúdló"]}
           />
         </div>
       }

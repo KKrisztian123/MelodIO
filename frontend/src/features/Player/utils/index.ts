@@ -26,7 +26,7 @@ export const secondsToTimeStamp = (seconds: number) => {
 };
 
 export const createSongUrl = (id, fileType) =>
-  `${baseUrl}play/${id}.${fileType}`;
+  `${baseUrl}/play/${id}.${fileType}`;
 
 export const getRandomIndex = (max) => {
   return Math.floor(Math.random() * max);

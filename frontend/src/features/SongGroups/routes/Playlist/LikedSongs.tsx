@@ -10,6 +10,7 @@ import { SongGroupItemWithImage } from "@features/SongGroups/components/SongItem
 import useLikedSongs from "@features/SongGroups/hooks/useLikedSongs";
 import { usePlayer } from "@features/Player";
 import usePlaying from "@features/Player/hooks/usePlaying";
+import CenteredTextContainer from "@components/CenteredTextContainer";
 
 const LikedSongs: FC = () => {
   const { likedSongs, setLikedSongs, errorContent, isLoading } =
@@ -19,9 +20,9 @@ const LikedSongs: FC = () => {
   const { songId } = usePlaying();
   const playSong = useCallback(
     (songId: string) => {
-      play("liked-songs", likedSongs.songs, songId);
+      play("liked-songs", likedSongs, songId);
     },
-    [likedSongs.songs, play]
+    [likedSongs, play]
   );
 
   return (
@@ -36,22 +37,26 @@ const LikedSongs: FC = () => {
           loaderText={"Album betöltése"}
           loading={isLoading}
         >
+          <CenteredTextContainer
+            visible={likedSongs.length === 0}
+            title="Nincsenek kedvelt dalok!"
+            description="Add hozzá kedvenc dalaid bármely albumból."
+          />
           <ListContainer>
-            {likedSongs.songs &&
-              likedSongs.songs?.map((song: Song) => (
-                <SongGroupItemWithImage
-                  key={song?.id}
-                  id={song?.id}
-                  title={song?.name}
-                  creators={song?.author?.map((author) => author.name)}
-                  type={song.album?.name}
-                  image={song.album?.image}
-                  favorite={song?.favorite}
-                  active={song?.id === songId}
-                  like={like}
-                  onClick={playSong}
-                />
-              ))}
+            {likedSongs.map((song: MergedSong) => (
+              <SongGroupItemWithImage
+                key={song?.id}
+                id={song?.id}
+                title={song?.name}
+                creators={song?.author?.map((author: Author) => author.name)}
+                type={song.album?.name}
+                image={song.album?.image}
+                favorite={song?.favorite}
+                active={song?.id === songId}
+                like={like}
+                onClick={playSong}
+              />
+            ))}
           </ListContainer>
         </PageFetchDisplay>
       </PageContent>

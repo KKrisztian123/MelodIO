@@ -188,7 +188,7 @@ export const handlers = [
     );
   }),
   /** Auth: User; password change mock response */
-  rest.post("/user/:userId/passwordChange", async (req, res, ctx) => {
+  rest.post("/user/:userId/password", async (req, res, ctx) => {
     let body = successResponse({});
     const payload = await req.json();
     if (payload.password === payload.newPassword) {
@@ -214,7 +214,7 @@ export const handlers = [
     return res(ctx.delay(1000), ctx.body(body), ctx.status(200));
   }),
   /** Auth: User Profile edit mock response  */
-  rest.post("/user/:userId/profile", async (req, res, ctx) => {
+  rest.post("/user/:userId", async (req, res, ctx) => {
     const payload = (await req.body) as Profile;
     const image = payload.image;
 
@@ -245,7 +245,7 @@ export const handlers = [
     return res(ctx.delay(1000), ctx.body(body), ctx.status(200));
   }),
   /** Auth: Admin; artist creation mock response */
-  rest.post("/artists", async (req, res, ctx) => {
+  rest.post("/artists/new", async (req, res, ctx) => {
     const body = successResponse({});
     return res(ctx.delay(1000), ctx.body(body), ctx.status(200));
   }),
@@ -297,7 +297,7 @@ export const handlers = [
     return res(ctx.delay(1000), ctx.body(body), ctx.status(200));
   }),
   /** Auth: Admin; album creation mock response */
-  rest.post("/albums", async (req, res, ctx) => {
+  rest.post("/albums/new", async (req, res, ctx) => {
     const body = successResponse({});
     return res(ctx.delay(1000), ctx.body(body), ctx.status(200));
   }),

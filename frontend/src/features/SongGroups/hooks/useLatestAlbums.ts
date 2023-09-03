@@ -7,7 +7,7 @@ import { mutate } from "swr";
 /** Returns latest albums. */
 export const useLatestAlbums = () => {
   const [data, error, isLoading] = useFetch("GET", "/list/releases");
-  const [albums, setAlbums] = useState<Album[]>([]);
+  const [albums, setAlbums] = useState<MergedAlbum[]>([]);
   const { showError, errorContent } = useError();
 
   useEffect(() => {

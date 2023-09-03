@@ -1,5 +1,8 @@
 import { IconButton } from "@components/Button/Button";
-import { MusicalListItem } from "@components/List/ListItem";
+import {
+  MusicalListItem,
+  MusicalListItemProps,
+} from "@components/List/ListItem";
 import NumberBox from "@components/NumberBox/NumberBox";
 import { memo } from "react";
 import { faHeart as faHeartSolid } from "@fortawesome/free-solid-svg-icons";
@@ -8,8 +11,28 @@ import { XSImage } from "@components/Image/Image";
 import { AnimatePresence, motion } from "framer-motion";
 import { SmallLoader } from "@components/Loaders/Loaders";
 
+export type SongGroupItemProps = {
+  id: string;
+  title: MusicalListItemProps["name"];
+  creators: MusicalListItemProps["creators"];
+  number: number;
+  like: (songId: string) => void;
+  onClick: (...v: any) => void;
+  active?: boolean;
+  favorite: boolean;
+};
+
 const SongGroupItem = memo(
-  ({ id, title, creators, number, like, favorite, onClick, active }) => (
+  ({
+    id,
+    title,
+    creators,
+    number,
+    like,
+    favorite,
+    onClick,
+    active,
+  }: SongGroupItemProps) => (
     <MusicalListItem
       name={title}
       creators={creators}
@@ -61,8 +84,22 @@ export default SongGroupItem;
 
 SongGroupItem.displayName = "SongGroupItem";
 
+export type SongGroupItemWithImageProps = Omit<SongGroupItemProps, "number"> & {
+  image: string;
+  type?: MusicalListItemProps["type"];
+};
 export const SongGroupItemWithImage = memo(
-  ({ id, title, creators, like, favorite, image, type, onClick, active }) => (
+  ({
+    id,
+    title,
+    creators,
+    like,
+    favorite,
+    image,
+    type,
+    onClick,
+    active,
+  }: SongGroupItemWithImageProps) => (
     <MusicalListItem
       name={title}
       creators={creators}

@@ -1,6 +1,5 @@
 import Button from "@components/Button/Button";
 import ButtonContainer from "@components/ButtonContainer/ButtonContainer";
-import ListContainer from "@components/List/ListContainer";
 import FullScreenModal from "@components/Modal/FullScreenModal";
 import Text from "@components/Text/Text";
 import HiddenInput from "@components/Form/input/HiddenInput";

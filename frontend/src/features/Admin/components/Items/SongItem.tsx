@@ -6,16 +6,19 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { memo } from "react";
 
 /** Memoized song item for admin song search list */
-export const SongItem = ({ id, name, author, album }: Song) => {
+export const SongItem = ({ id, name, author, album }: MergedSong) => {
   return (
     <MusicalListItem
       name={name}
       type={album.name}
-      creators={author.map((author) => author.name)}
+      creators={author.map((author: Author) => author.name)}
       link={`/settings/songs/${id}`}
       leftOrnament={
         <NumberBox>
-          <FontAwesomeIcon icon={faMusic} style={{ fontSize: "2rem", color: "var(--ion-color-primary-tint)" }} />
+          <FontAwesomeIcon
+            icon={faMusic}
+            style={{ fontSize: "2rem", color: "var(--ion-color-primary-tint)" }}
+          />
         </NumberBox>
       }
     />
@@ -32,14 +35,14 @@ export const SongFormItem = ({
   type,
   onClick,
   ...rest
-}: StatelessSong & {
-  onClick: (id: string, author: StatelessSong) => void;
+}: MergedStatelessSong & {
+  onClick: (id: string, author: MergedStatelessSong) => void;
 }) => {
   return (
     <MusicalListItem
       name={name}
       type={album.name}
-      creators={author.map((author) => author.name)}
+      creators={author.map((author: Author) => author.name)}
       rightOrnament={
         <IconButton
           icon={faPlus}
@@ -53,7 +56,10 @@ export const SongFormItem = ({
       }
       leftOrnament={
         <NumberBox>
-          <FontAwesomeIcon icon={faMusic} style={{ fontSize: "2rem", color: "var(--ion-color-primary-tint)" }} />
+          <FontAwesomeIcon
+            icon={faMusic}
+            style={{ fontSize: "2rem", color: "var(--ion-color-primary-tint)" }}
+          />
         </NumberBox>
       }
     />

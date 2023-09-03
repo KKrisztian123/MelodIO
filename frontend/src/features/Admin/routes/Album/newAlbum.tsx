@@ -11,10 +11,11 @@ import type { FC } from "react";
 import { useHistory } from "react-router";
 import FormSelection from "@components/Form/FormSelection/FormSelection";
 import AuthorsSelector from "@features/Admin/components/Selection/AuthorsSelector";
+import DateField from "@components/Form/input/DateField";
 
 const NewAlbumPage: FC = () => {
   const history = useHistory();
-  const imageFormProps = useImageForm("POST", "/albums", {
+  const imageFormProps = useImageForm("POST", "/albums/new", {
     onSuccess: () => history.goBack(),
     defaultValues: { name: "" },
   });
@@ -30,6 +31,15 @@ const NewAlbumPage: FC = () => {
           modalTitle="Borítókép"
           requiredImage
         >
+          <FormFlex>
+            <FormBlock>
+              <DateField
+                id="releaseDate"
+                label="Kiadási dátum"
+                config={{ required: { value: true, message: "" } }}
+              />
+            </FormBlock>
+          </FormFlex>
           <FormSelection
             title="Előadók"
             selectorContentTitle="Előadó választása"

@@ -16,12 +16,17 @@ import { SelectedAuthorsList } from "@features/Admin/components/Selection/Select
 import FormSelection from "@components/Form/FormSelection/FormSelection";
 import AuthorsSelector from "@features/Admin/components/Selection/AuthorsSelector";
 import { responseHandler } from "@/utils/utils";
+import useToggle from "@hooks/useToggle";
+import DateField from "@components/Form/input/DateField";
+import format from "date-fns/format";
+import { parseISO } from "date-fns";
 
 const EditAlbumPage: FC = () => {
   const { albumId } = useParams<{ albumId: string }>();
   const history = useHistory();
   const { errorContent, showError } = useError();
   const [fetcher, loading] = useAxios("GET", `/albums/${albumId}`);
+  const [contentLoading, setContentLoading] = useToggle(true);
   const {
     fetch: fetchList,
     result,
@@ -44,6 +49,7 @@ const EditAlbumPage: FC = () => {
   );
 
   useEffect(() => {
+    setContentLoading(true);
     fetcher({})
       .then((res: APIResponse<Album>) =>
         responseHandler(
@@ -54,21 +60,23 @@ const EditAlbumPage: FC = () => {
               image: [payload.image],
               name: payload.name,
               kislemez: payload.type === "Kislemez",
+              releaseDate: format(parseISO(payload.releaseDate),"yyyy.MM.d"),
             }),
-            fetchList(payload.author)
+            fetchList(payload.author),
+            setContentLoading(false)
           )
         )
       )
       .catch(() => showError(true));
-  }, [fetcher, showError, setPreview, fetchList]);
+  }, [fetcher, showError, setPreview, fetchList, setContentLoading]);
 
   return (
     <IonPage>
       <Header leftOrnament={<BackButton />}>Album szerkesztése</Header>
       <PageContent>
         <PageFetchDisplay
-          error={!loading && !listLoading && errorContent}
-          loading={loading || listLoading}
+          error={!contentLoading && !loading && !listLoading && errorContent}
+          loading={loading || listLoading || contentLoading}
           errorText={errorContent}
           loaderText={"Album betöltése"}
         >
@@ -82,6 +90,15 @@ const EditAlbumPage: FC = () => {
             loaderText="Album módosítása"
             requiredImage
           >
+            <FormFlex>
+              <FormBlock>
+                <DateField
+                  id="releaseDate"
+                  label="Kiadási dátum"
+                  config={{ required: { value: false, message: "" } }}
+                />
+              </FormBlock>
+            </FormFlex>
             <FormSelection
               title="Előadók"
               selectorContentTitle="Előadó választása"

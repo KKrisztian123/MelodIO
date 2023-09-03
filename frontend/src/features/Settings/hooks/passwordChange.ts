@@ -1,16 +1,16 @@
 import { responseHandler } from "@/utils/utils";
-import { PasswordFieldProps } from "@components/Form/input/PasswordField";
 import { useSession } from "@features/Auth/Index";
 import { useAnimatedError } from "@hooks/useError";
 import { useAxios } from "@hooks/useFetch";
+import { PasswordChange } from "../types/Index";
 
 /** Custom hook for changing account password. */
 export const usePasswordChange = () => {
   const { userId } = useSession();
-  const [fetch, loading] = useAxios("POST", `/user/${userId}/passwordChange`);
+  const [fetch, loading] = useAxios("POST", `/user/${userId}/password`);
   const { ref, showError, errorContent } = useAnimatedError();
 
-  const changePassword = (v: PasswordFieldProps) =>
+  const changePassword = (v: PasswordChange) =>
     fetch(v)
       .then((res: APIResponse<object>) =>
         responseHandler(res, showError, () => true)

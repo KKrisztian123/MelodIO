@@ -52,7 +52,9 @@ const HistoryCard = ({
                   <MusicalText
                     name={album.name}
                     type={album.type}
-                    creators={album.author?.map((artist) => artist.name)}
+                    creators={album.author?.map(
+                      (artist: Author) => artist.name
+                    )}
                   />
                 </div>
               }

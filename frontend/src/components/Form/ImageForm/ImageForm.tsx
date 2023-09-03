@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import Button from "@components/Button/Button";
 import ButtonContainer from "@components/ButtonContainer/ButtonContainer";
 import Form, { FormProps } from "@components/Form/Form";
@@ -51,6 +52,7 @@ const ImageForm = ({
   return (
     <>
       <Form
+        //@ts-ignore
         onSubmit={submit}
         onChange={setPreview}
         defaultValues={defaultValues}

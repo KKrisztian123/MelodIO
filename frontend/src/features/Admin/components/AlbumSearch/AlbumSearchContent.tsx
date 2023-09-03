@@ -7,10 +7,10 @@ import { MemoAlbumItem } from "../Items/AlbumItem";
 import { MemoAlbumFormItem } from "../Items/AlbumItem";
 
 const AlbumSearchContent = () => {
-  const { result } = useSearchContext();
+  const { result, error, isLoading } = useSearchContext();
   return (
     <ListContainer>
-      {result && (
+      {!error.errorContent && !isLoading && (
         <MemoedListItem
           link="/settings/albums/new"
           title="Hozzáadás"
@@ -25,7 +25,9 @@ const AlbumSearchContent = () => {
         />
       )}
       {result &&
-        result.map((album) => <MemoAlbumItem key={album.id} {...album} />)}
+        result.map((album: MergedStatelessAlbum) => (
+          <MemoAlbumItem key={album.id} {...album} />
+        ))}
     </ListContainer>
   );
 };
@@ -41,7 +43,7 @@ export const AlbumSearchFormSelectContent = ({
   return (
     <ListContainer>
       {result &&
-        result.map((album) => (
+        result.map((album: MergedStatelessAlbum) => (
           <MemoAlbumFormItem key={album.id} onClick={onClick} {...album} />
         ))}
     </ListContainer>

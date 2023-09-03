@@ -25,7 +25,7 @@ const WidgetContent = () => {
       <div className={styles.playerWidgetInfo}>
         <MusicalText
           name={playerState.song?.name}
-          creators={playerState.song?.author?.map((author) => author.name)}
+          creators={playerState.song?.author?.map((author: Author) => author.name)}
         />
         <ProgressBar
           size="small"

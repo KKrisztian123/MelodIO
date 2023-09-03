@@ -96,9 +96,8 @@ export const ImageUploadField = ({
       <FullScreenLoader loading={loading} text="Tömörítés" />
       <FileUploadPrimitive
         {...register}
-        accept=".png,.avif,.gif,.jpeg,.svg,.webp"
+        accept=".png,.avif,.gif,.jpeg,.svg,.webp,.jpg"
       />
     </>
   );
 };
-

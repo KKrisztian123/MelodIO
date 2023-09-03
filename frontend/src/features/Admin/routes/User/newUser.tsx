@@ -15,7 +15,7 @@ const NewUserPage: FC = () => {
   const history = useHistory();
   const { preview, ...imageFormProps } = useImageForm("POST", `/user/new`, {
     onSuccess: () => history.goBack(),
-    defaultValues: { name: "" },
+    defaultValues: { name: "", image: false },
   });
 
   return (
@@ -27,6 +27,7 @@ const NewUserPage: FC = () => {
           {...imageFormProps}
           modalTitle="Profilkép"
           buttonTitle="Létrehozás"
+          defaultValues={preview}
           loaderText="Profil létrehozása"
         >
           <FormFlex>

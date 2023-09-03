@@ -74,7 +74,7 @@ export const useAxios = (
   );
 
   const fetchWrapper = useCallback(
-    async (data: object, params?: object, urlAlt?: string) => {
+    async (data: object, params?: object) => {
       dispatch({ type: actionKinds.LOADING, payload: true });
 
       return fetcher(method, url, data, {

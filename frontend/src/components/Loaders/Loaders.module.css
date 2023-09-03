@@ -8,7 +8,7 @@
     font-size: 0.85rem;
     width: fit-content;
     border-radius: 20px;
-    font-family: "Inter", Arial, Helvetica, sans-serif;
+    font-family: var(--font-primary);
 }
 .loaderWrapper.withBackground{
     padding: 30px 20px;
@@ -37,7 +37,7 @@
 .loaderWrapper.withBackground{
     background-color: var(--ion-color-secondary);
     backdrop-filter: blur(40px);
-    border: 1px solid var(--ion-color-light-shade);
+    border: 1px solid var(--ion-color-secondary-shade);
     box-shadow: var(--shadow-medium);
 }
 

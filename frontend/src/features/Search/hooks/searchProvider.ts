@@ -1,6 +1,7 @@
-import useError from "@hooks/useError";
+import { useAnimatedError } from "@hooks/useError";
 import { Dispatch, SetStateAction, useContext } from "react";
 import { SearchContext } from "../components/Search";
+import { SearchContextType } from "../types";
 
 export type searchConfig = {
   /** Search loading state. */
@@ -8,7 +9,7 @@ export type searchConfig = {
   /** Searching callback function. */
   fetch: (v: string) => void;
   /** Search error handler. */
-  errorHandler: ReturnType<typeof useError>;
+  errorHandler: ReturnType<typeof useAnimatedError>;
   /** Search result. */
   result: false | object[];
   /** Search result setter. */
@@ -42,6 +43,8 @@ export const useSearchProvider = (
 };
 
 /** Returns search context */
-export const useSearchContext = () => {
-  return useContext(SearchContext);
+export const useSearchContext = <T>() => {
+  return useContext(SearchContext) as SearchContextType & {
+    result: false | T;
+  };
 };

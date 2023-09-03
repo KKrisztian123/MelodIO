@@ -19,7 +19,7 @@ const ProfilePage: FC = () => {
   const history = useHistory();
   const { preview, ...imageFormProps } = useImageForm(
     "POST",
-    `/user/${userId}/profile`,
+    `/user/${userId}`,
     {
       onSuccess: (res) => (set(res), history.goBack()),
       defaultValues: {

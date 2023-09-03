@@ -14,7 +14,7 @@ import { SelectedAlbumsList } from "@features/Admin/components/Selection/Selecte
 
 const NewSongPage: FC = () => {
   const history = useHistory();
-  const fileFormProps = useFileForm("POST", "/songs", {
+  const fileFormProps = useFileForm("POST", "/songs/new", {
     onSuccess: () => history.goBack(),
     defaultValues: { name: "" },
   });

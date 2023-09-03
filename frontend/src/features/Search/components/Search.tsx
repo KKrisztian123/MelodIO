@@ -4,11 +4,12 @@ import SearchField from "@components/Search/Search";
 import Content from "@components/Layout/Frame/ContentContainer/Content";
 import SearchContent from "./SearchContent";
 import { SearchContentProps } from "./SearchContent";
+import { type SearchContextType } from "../types";
 
 /** Search Provider */
-export const SearchContext = createContext<
-  ReturnType<typeof useSearchProvider>
->({} as ReturnType<typeof useSearchProvider>);
+export const SearchContext = createContext<SearchContextType>(
+  {} as SearchContextType
+);
 
 type SearchProps = SearchContentProps &
   searchConfig & {
@@ -32,13 +33,15 @@ const SearchFeature = ({
   emptyDescription,
   ...rest
 }: PropsWithChildren<SearchProps>) => {
-  const search = useSearchProvider(mode, {...rest});
+  const search = useSearchProvider(mode, { ...rest });
   return (
     <SearchContext.Provider value={search}>
       <Content sidePadded>
         <SearchField onChange={search.fetch} placeholder={placeholder} />
       </Content>
-      <SearchContent emptyText={emptyText} emptyDescription={emptyDescription} >{children}</SearchContent>
+      <SearchContent emptyText={emptyText} emptyDescription={emptyDescription}>
+        {children}
+      </SearchContent>
     </SearchContext.Provider>
   );
 };

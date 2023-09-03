@@ -2,7 +2,7 @@ import { useAxiosWithUrl } from "@hooks/useFetch";
 import { getLikedSongsInList, changeLikeState } from "../utils/utils";
 import { responseHandler } from "@/utils/utils";
 
-export const useLike = (type: "album" | "song", result, setResult, count?: "single" | "multiple" = "multiple") => {
+export const useLike = (type: "album" | "song", result, setResult, count: "single" | "multiple" = "multiple") => {
   const [fetcher] = useAxiosWithUrl("POST");
   const changeLike = (value, id) =>
     setResult((current) => changeLikeState(type, current, value, id, count));

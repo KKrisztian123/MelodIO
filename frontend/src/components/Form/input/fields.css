@@ -67,7 +67,7 @@ button.inp-bait {
   background-color: var(--ion-color-light);
   display: inline-block;
   border-radius: 14px;
-  font-family: "Inter", Arial, Helvetica, sans-serif;
+  font-family: var(--font-primary);
   box-shadow: var(--shadow-medium);
 }
 .inp .label {

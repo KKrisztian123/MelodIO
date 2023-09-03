@@ -12,8 +12,8 @@ export const storeBaseUrl = async (baseUrl: string) =>
   await Preferences.set({ key: "endpoint", value: baseUrl });
 
 /** Configures the base url of the app from storage. */
-export const initializeBaseUrl = () => {
-  getBaseUrl().then((res) => {
+export const initializeBaseUrl = async () => {
+  await getBaseUrl().then((res) => {
     if (typeof res === "string") {
       axios.defaults.baseURL = res;
     }

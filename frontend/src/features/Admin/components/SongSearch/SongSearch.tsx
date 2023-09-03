@@ -9,7 +9,7 @@ const filterFunction = (value: MergedSong, condition: string) =>
   wordFilter(value.name, condition) ||
   wordFilter(value.album.name, condition) ||
   wordFilter(
-    createArtistList(value.author.map((author) => author.name)),
+    createArtistList(value.author.map((author: Author) => author.name)),
     condition
   );
 

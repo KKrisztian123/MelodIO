@@ -11,18 +11,18 @@ const Template: StoryFn<typeof GridImageItem> = (args) => <GridImageItem {...arg
 export const Regular = Template.bind({});
 
 Regular.args = {
-    albumId:"asdasdasd",
-    albumCreators:["Dzsúdló", "Beck Zoli"],
-    albumName:"Szörnyeteg",
+    id:"asdasdasd",
+    creators:["Dzsúdló", "Beck Zoli"],
+    name:"Szörnyeteg",
     imageUrl:"https://i.scdn.co/image/ab67616d0000b273773bdf93fd396de23d71f63b",
 }
 
 export const WithAlbumType = Template.bind({});
 
 WithAlbumType.args = {
-    albumId:"asdasdasd",
-    albumCreators:["Dzsúdló", "Beck Zoli"],
-    albumName:"Szörnyeteg",
-    albumType:"Album",
+    id:"asdasdasd",
+    creators:["Dzsúdló", "Beck Zoli"],
+    name:"Szörnyeteg",
+    type:"Album",
     imageUrl:"https://i.scdn.co/image/ab67616d0000b273773bdf93fd396de23d71f63b",
 }

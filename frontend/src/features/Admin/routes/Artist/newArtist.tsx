@@ -9,7 +9,7 @@ import ImageForm from "@components/Form/ImageForm/ImageForm";
 
 const NewArtistPage: FC = () => {
   const history = useHistory();
-  const imageFormProps = useImageForm("POST", "/artists", {
+  const imageFormProps = useImageForm("POST", "/artists/new", {
     onSuccess: () => history.goBack(),
     defaultValues: { name: "" },
   });

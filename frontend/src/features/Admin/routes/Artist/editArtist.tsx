@@ -10,11 +10,13 @@ import useError from "@hooks/useError";
 import { useImageForm } from "@hooks/useImageForm";
 import ImageForm from "@components/Form/ImageForm/ImageForm";
 import { responseHandler } from "@/utils/utils";
+import useToggle from "@hooks/useToggle";
 const EditArtistPage: FC = () => {
   const { artistId } = useParams<{ artistId: string }>();
   const history = useHistory();
   const { errorContent, showError } = useError();
   const [fetcher, loading] = useAxios("GET", `/artists/${artistId}`);
+  const [contentLoading, setContentLoading] = useToggle(true);
 
   const { setPreview, preview, ...imageFormProps } = useImageForm(
     "POST",
@@ -25,25 +27,31 @@ const EditArtistPage: FC = () => {
   );
 
   useEffect(() => {
+    setContentLoading(true);
     fetcher({})
       .then((res: APIResponse<Author>) =>
-        responseHandler(res, showError, (payload) =>
-          setPreview({
-            image: [payload.image],
-            name: payload.name,
-          })
+        responseHandler(
+          res,
+          showError,
+          (payload) => (
+            setPreview({
+              image: [payload.image],
+              name: payload.name,
+            }),
+            setContentLoading(false)
+          )
         )
       )
       .catch(() => showError(true));
-  }, [fetcher, showError, setPreview]);
+  }, [fetcher, showError, setPreview, setContentLoading]);
 
   return (
     <IonPage>
       <Header leftOrnament={<BackButton />}>Előadó szerkesztése</Header>
       <PageContent>
         <PageFetchDisplay
-          error={!loading && errorContent}
-          loading={loading}
+          error={!contentLoading && !loading && errorContent}
+          loading={loading || contentLoading}
           errorText={errorContent}
           loaderText={"Előadó betöltése"}
         >

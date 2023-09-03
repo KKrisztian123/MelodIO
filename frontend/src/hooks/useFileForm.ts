@@ -1,5 +1,8 @@
-import { createFormData, responseHandler } from "@/utils/utils";
-import { Profile, ProfileRequest } from "@features/Profile/types";
+import {
+  createFormData,
+  getImageFromList,
+  responseHandler,
+} from "@/utils/utils";
 import { useAnimatedError } from "@hooks/useError";
 import { useAxios } from "@hooks/useFetch";
 import { useState } from "react";
@@ -11,14 +14,14 @@ export const useFileForm = (
   {
     onSuccess,
     defaultValues,
-  }: { onSuccess?: (e: Profile) => void; defaultValues?: object }
+  }: { onSuccess?: (e: any) => void; defaultValues?: object }
 ) => {
   const [fetcher, isLoading] = useAxios(method, endpoint);
   const { showError, errorContent, ref: errorRef } = useAnimatedError();
   const [preview, setPreview] = useState(defaultValues || {});
 
-  const submit = (v: ProfileRequest) => {
-    fetcher(createFormData(v))
+  const submit = ({ file: files, ...rest }: any) => {
+    fetcher(createFormData({ file: getImageFromList(files), ...rest }))
       .then((res) =>
         responseHandler(
           res,

@@ -13,7 +13,7 @@ input[type="search"]::-webkit-search-results-decoration {
 .search-container .searchbox {
   --border-radius: 0;
   --background: var(--ion-color-light);
-  font-family: "Inter", Arial, Helvetica, sans-serif;
+  font-family: var(--font-primary);
 }
 .search-container .searchbox div.searchbar-input-container {
   height: 52px;
