@@ -35,6 +35,7 @@ export const saveProfileData = async ({ image, ...rest }: Profile) => {
       path: `${PROFILE_LOCATION}.${imageType}`,
       data: image, //base64
       directory: Directory.Data,
+      recursive: true,
     }))
   );
 };

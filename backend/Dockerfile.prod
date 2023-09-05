@@ -3,7 +3,8 @@ WORKDIR /app/backend
 RUN apk add --no-cache shadow
 COPY package.json .
 COPY package-lock.json .
-RUN npm i
 COPY . .
+RUN rm -rf node_modules
+RUN npm i
 EXPOSE 3000
 CMD npm run build && npm run start:prod
